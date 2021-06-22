@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS clonello_db;
+
+CREATE DATABASE clonello_db;
