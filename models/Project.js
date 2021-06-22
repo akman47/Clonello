@@ -1,10 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection.js');
-const bcrypt = require('bcrypt');
 
-class User extends Model {}
+class Project extends Model {}
 
-User.init(
+Project.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -12,15 +11,24 @@ User.init(
       primaryKey: true,
       autoIncrement: true
     },
-    username: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    password: {
-      type: DataTypes.STRING,
+    user_id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-      validate: {
-        len: [4]
+      references: {
+        model: 'user',
+        key: 'id'
+      }
+    },
+    task_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'task',
+        key: 'id'
       }
     }
   },
@@ -29,8 +37,8 @@ User.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'user'
+    modelName: 'project'
   }
 );
 
-module.exports = User;
+module.exports = Project;
