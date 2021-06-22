@@ -16,3 +16,5 @@ Project.belongsTo(User);
 Project.belongsTo(Task);
 User.hasMany(Project);
 Task.hasMany(Project);
+
+module.exports = { User, Task, Status, Project };
