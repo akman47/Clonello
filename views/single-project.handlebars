@@ -1,0 +1,52 @@
+<section class="modal-add-task">
+    <div class="modal-content">
+        <div class="add-task">
+            <h2>Add New Project Task</h2>
+            <form class="new-task-form">
+                <div class="form-input">
+                    <input type="text" id="new-task" name="new-task" placeholder="Task" />
+                </div>
+                <div class="form-input user-menu">
+                    <select name="user-menu" id="user-menu">
+                        <option disabled selected value>Assign Task To: </option>
+                        {{#each user}}
+                        <option value="{{user.username}}">{{user.username}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-input status-menu">
+                    <select name="status" id="status-menu">
+                        <option disabled selected value>Select Task Status</option>
+                        <option value="To Do">To Do</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Urgent">Urgent</option>
+                    </select>
+                </div>
+                <buttom type="submit" class="btn">Add Task</buttom>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="project-header">
+        <h2>{{title}}</h2>
+        <button type="button" class="btn btn-add-user">Invite Project Member</button>
+    </div>
+    <table>
+        <tr>
+            <th class="table-header">Task</th>
+            <th class="table-header">Assigned</th>
+            <th class="table-header">Status</th>
+        </tr>
+        {{#each task}}
+        <tr>
+            <td>{{task}}</td>
+            <td>{{user.username}}</td>
+            <td>{{status}}</td>
+        </tr>
+        {{/each}}
+    </table>
+    <button type="button" class="btn">Add Task</button>
+</section>
