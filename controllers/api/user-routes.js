@@ -50,7 +50,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req,res) => {
     User.create({
         username: req.body.username,
-        project_id: req.body.project_id
+        password: req.body.password
     })
     .then(dbUserData => res.json(dbUserData))
     .catch(err => {
