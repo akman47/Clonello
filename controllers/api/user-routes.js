@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Project } = require('../../models');
+const { User, Project, Task, UserProject, UserTask } = require('../../models');
 
 // GET all users
 router.get('/', (req, res) => {
@@ -8,7 +8,11 @@ router.get('/', (req, res) => {
         include: [
             {
                 model: Project,
-                attributes: ['title']
+                attributes: ['id', 'title']
+            },
+            {
+                model: Task,
+                attritubtes: ['id', 'task_text', 'status_id']
             }
         ]
     })
@@ -29,9 +33,12 @@ router.get('/:id', (req, res) => {
             {
                 model: Project,
                 attributes: ['id', 'title']
+            },
+            {
+                model: Task,
+                attritubtes: ['id', 'task_text', 'status_id']
             }
         ]
-
     })
     .then(dbUserData => {
         if (!dbUserData) {
@@ -57,6 +64,28 @@ router.post('/', (req,res) => {
         console.log(err);
         res.status(500).json(err);
     });
+});
+
+// UPDATE user's project  /api/users/task
+router.put('/task', (req, res) => {
+    // to add later: make sure session exists first
+    Post.task({ ...req.body, user_id }, {UserTask})
+        .then(updatedUserData => res.json(updatedUserData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+
+// UPDATE user's task /api/users/project
+router.put('/project', (req, res) => {
+    // to add later: make sure session exists first
+    Post.project({ ...req.body, user_id }, {UserProject})
+        .then(updatedUserData => res.json(updatedUserData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
 });
 
 // UPDATE user 
