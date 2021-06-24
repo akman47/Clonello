@@ -24,8 +24,28 @@
                         <option value="Urgent">Urgent</option>
                     </select>
                 </div>
-                <buttom type="submit" class="btn btn-add-task">Add Task</buttom>
-                <buttom type="submit" class="btn btn-close-modal">Close</buttom>
+                <button type="submit" class="btn btn-add-task">Add Task</button>
+                <button type="button" class="btn btn-close-modal">Close</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section class="modal-invite-user">
+    <div class="modal-content">
+        <div class="invite-user">
+            <h2>Invite New Project Member</h2>
+            <form class="add-user-form">
+                <div class="form-input user-menu">
+                    <label for="invite-user-menu">Choose a user to invite: </label>
+                    <select name="invite-user-menu" id="invite-user-menu">
+                        {{!-- {{#each user}} will need to push getAll user data to display here--}}
+                        <option value="{{user.username}}" data-user-id:"{{user.id}}">{{user.username}}</option>
+                        {{!-- {{/each}} --}}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-invite-user">Add User</button>
+                <button type="button" class="btn btn-close-modal">Close</button>
             </form>
         </div>
     </div>
@@ -35,7 +55,7 @@
     <a class="back" href="/dashboard"> &larr; Back to Dashboard</a>
     <div class="project-header">
         <h2>{{title}}</h2>
-        <button type="button" class="btn btn-add-user">Invite Project Member</button>
+        <button type="button" class="btn btn-open-invite-modal">Invite Project Member</button>
     </div>
     <table>
         <tr>
