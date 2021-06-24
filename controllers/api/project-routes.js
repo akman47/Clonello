@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, Task, Project } = require('../../models/');
+const withAuth = require('../../utils/auth');
 
 // GET all projects
 router.get('/', (req, res) => {
@@ -55,7 +56,7 @@ router.get('/:id', (req, res) => {
 });
 
 // Create project
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
     Project.create({
         title: req.body.title
     })
@@ -67,7 +68,7 @@ router.post('/', (req, res) => {
 });
 
 // EDIT project
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
     Project.update(
         {
             title: req.body.title
@@ -92,7 +93,7 @@ router.put('/:id', (req, res) => {
 });
 
 // DELETE project
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     Project.destroy({
         where: {
             id: req.params.id

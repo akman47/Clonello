@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, Task, Status } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 router.get('/', (req, res) => {
   Task.findAll({
@@ -50,7 +51,7 @@ router.get('/:id', (req, res) => {
   });
 });
 
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
   Task.create({
     task_text: req.body.task_text,
     // TO DO: change 'body' to 'session' after implementing express-session!!!!!!!
@@ -63,7 +64,7 @@ router.post('/', (req, res) => {
   });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
   Task.update(
     {
       task_text: req.body.task_text
@@ -87,7 +88,7 @@ router.put('/:id', (req, res) => {
   });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
   Task.destroy({
     where: {
       id: req.params.id
