@@ -1,13 +1,17 @@
 const router = require('express').Router();
-const { User, Task, Project, Status } = require('../../models');
+const { User, Project, Task, Status } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-
 router.get('/', (req, res) => {
-  Status.findAll({
+  Project.findAll({
     include: [
       {
+        model: User,
+        attributes: ['username']
+      },
+      {
         model: Task,
+        attributes: ['task_text'],
         include: [
           {
             model: User,
@@ -15,17 +19,17 @@ router.get('/', (req, res) => {
           },
           {
             model: Project,
-            attributes: ['title'],
-            include: {
-              model: User,
-              attributes: ['username']
-            }
+            attributes: ['title']
+          },
+          {
+            model: Status,
+            attributes: ['title']
           }
         ]
       }
     ]
   })
-  .then(dbStatusData => res.json(dbStatusData))
+  .then(dbProjectData => res.json(dbProjectData))
   .catch(err => {
     console.log(err);
     res.status(500).json(err);
@@ -33,13 +37,18 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  Status.findOne({
+  Project.findOne({
     where: {
       id: req.params.id
     },
     include: [
       {
+        model: User,
+        attributes: ['username']
+      },
+      {
         model: Task,
+        attributes: ['task_text'],
         include: [
           {
             model: User,
@@ -47,22 +56,22 @@ router.get('/:id', (req, res) => {
           },
           {
             model: Project,
-            attributes: ['title'],
-            include: {
-              model: User,
-              attributes: ['username']
-            }
+            attributes: ['title']
+          },
+          {
+            model: Status,
+            attributes: ['title']
           }
         ]
       }
     ]
   })
-  .then(dbStatusData => {
-    if (!dbStatusData) {
-      res.status(404).json({ message: 'No status found with this id' });
+  .then(dbProjectData => {
+    if (!dbProjectData) {
+      res.status(404).json({ message: 'No project found with this id' });
       return;
     }
-    res.json(dbStatusData)
+    res.json(dbProjectData)
   })
   .catch(err => {
     console.log(err);
@@ -70,21 +79,22 @@ router.get('/:id', (req, res) => {
   });
 });
 
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
   if (req.session) {
-    Status.create({
-      title: req.body.title
+    Project.create({
+      title: req.body.title,
+      user_id: req.session.user_id
     })
-    .then(dbStatusData => res.json(dbStatusData))
+    .then(dbProjectData => res.json(dbProjectData))
     .catch(err => {
       console.log(err);
-      res.status(500).json(err);
+      res.status(400).json(err);
     });
   }
 });
 
 router.put('/:id', withAuth, (req, res) => {
-  Status.update(
+  Project.update(
     {
       title: req.body.title
     },
@@ -94,12 +104,12 @@ router.put('/:id', withAuth, (req, res) => {
       }
     }
   )
-  .then(dbStatusData => {
-    if (!dbStatusData) {
-      res.status(404).json({ message: 'No status found with this id' });
+  .then(dbProjectData => {
+    if (!dbProjectData) {
+      res.status(404).json({ message: 'No project found with this id' });
       return;
     }
-    res.json(dbStatusData);
+    res.json(dbProjectData);
   })
   .catch(err => {
     console.log(err);
@@ -108,17 +118,24 @@ router.put('/:id', withAuth, (req, res) => {
 });
 
 router.delete('/:id', withAuth, (req, res) => {
-  Status.destroy({
+  if (Task) {
+    Task.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+  }
+  Project.destroy({
     where: {
       id: req.params.id
     }
   })
-  .then(dbStatusData => {
-    if (!dbStatusData) {
-      res.status(404).json({ message: 'No status found with this id' });
+  .then(dbProjectData => {
+    if (!dbProjectData) {
+      res.status(404).json({ message: 'No project found with this id' });
       return;
     }
-    res.json(dbStatusData);
+    res.json(dbProjectData);
   })
   .catch(err => {
     console.log(err);

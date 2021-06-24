@@ -1,19 +1,19 @@
 const router = require('express').Router();
-const { User, Task, Status } = require('../models/');
+const { User, Task, Project } = require('../models/');
 const withAuth = require('../utils/auth.js');
 
 router.get('/', withAuth, (req, res) => {
   console.log(req.session);
-  Status.findAll({
+  Project.findAll({
     where: {
       user_id: req.session.user_id
     },
     include: [User, Task]
   })
-  .then(dbStatusData => {
-    const statuses = dbStatusData.map(Status => Status.get({ plain: true }));
+  .then(dbProjectData => {
+    const projects = dbProjectData.map(project => project.get({ plain: true }));
     res.render('dashboard.handlebars', {
-      statuses,
+      projects,
       loggedIn: true
     });
   })
@@ -28,7 +28,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
     where: {
       id: req.params.id
     },
-    include: [User, Status]
+    include: [User, Project]
   })
   .then(dbTaskData => {
     if (!dbTaskData) {

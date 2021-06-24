@@ -1,11 +1,28 @@
 const router = require('express').Router();
-const { User, Task, Status } = require('../../models');
+const { User, Task, Project, Status } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 
 router.get('/', (req, res) => {
   Task.findAll({
-    include: [User, Status]
+    include: [
+      {
+        model: User,
+        attributes: ['username']
+      },
+      {
+        model: Project,
+        attributes: ['title'],
+        include: {
+          model: User,
+          attributes: ['username']
+        }
+      },
+      {
+        model: Status,
+        attributes: ['title']
+      }
+    ]
   })
   .then(dbTaskData => res.json(dbTaskData))
   .catch(err => {
@@ -19,7 +36,24 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id
     },
-    include: [User, Status]
+    include: [
+      {
+        model: User,
+        attributes: ['username']
+      },
+      {
+        model: Project,
+        attributes: ['title'],
+        include: {
+          model: User,
+          attributes: ['username']
+        }
+      },
+      {
+        model: Status,
+        attributes: ['title']
+      }
+    ]
   })
   .then(dbTaskData => {
     if (!dbTaskData) {
@@ -38,6 +72,7 @@ router.post('/', (req, res) => {
   if (req.session) {
     Task.create({
       task_text: req.body.task_text,
+      project_id: req.body.project_id,
       status_id: req.body.status_id,
       user_id: req.session.user_id
     })

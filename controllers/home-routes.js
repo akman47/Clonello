@@ -1,15 +1,15 @@
 const router = require('express').Router();
-const { User, Task, Status } = require('../models/');
+const { User, Task, Project } = require('../models/');
 
 router.get('/', (req, res) => {
   console.log(req.session);
-  Status.findAll({
+  Project.findAll({
     include: [User, Task]
   })
-  .then(dbStatusData => {
-    const statuses = dbStatusData.map(status => status.get({ plain: true }));
+  .then(dbProjectData => {
+    const projects = dbProjectData.map(project => project.get({ plain: true }));
     res.render('homepage.handlebars', {
-      statuses,
+      projects,
       loggedIn: req.session.loggedIn
     });
   })
@@ -27,22 +27,22 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-router.get('/status/:id', (req, res) => {
-  Status.findOne({
+router.get('/project/:id', (req, res) => {
+  Project.findOne({
     where: {
       id: req.params.id
     },
     include: [User, Task]
   })
-  .then(dbStatusData => {
-    if (!dbStatusData) {
-      res.status(404).json({ message: 'No status found with this id' });
+  .then(dbProjectData => {
+    if (!dbProjectData) {
+      res.status(404).json({ message: 'No project found with this id' });
       return;
     }
 
-    const statuses = dbStatusData.get({ plain: true });
-    res.render('single-status', {
-      statuses,
+    const projects = dbProjectData.get({ plain: true });
+    res.render('single-project.handlebars', {
+      projects,
       loggedIn: req.session.loggedIn
     });
   })
