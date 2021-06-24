@@ -1,20 +1,10 @@
 const router = require('express').Router();
-const { User, Project, Task, UserProject, UserTask } = require('../../models');
+const { User, Task, Status } = require('../../models');
 
 // GET all users
 router.get('/', (req, res) => {
     User.findAll({
-        attributes: ['id', 'username'],
-        include: [
-            {
-                model: Project,
-                attributes: ['id', 'title']
-            },
-            {
-                model: Task,
-                attritubtes: ['id', 'task_text', 'status_id']
-            }
-        ]
+        attributes: { exclude: ['password'] }
     })
     .then(dbUserData => res.json(dbUserData))
     .catch(err => {
@@ -26,19 +16,11 @@ router.get('/', (req, res) => {
 // GET one user
 router.get('/:id', (req, res) => {
     User.findOne({
+        attributes: { exclude: ['password'] },
         where: {
             id: req.params.id
         },
-        include: [
-            {
-                model: Project,
-                attributes: ['id', 'title']
-            },
-            {
-                model: Task,
-                attritubtes: ['id', 'task_text', 'status_id']
-            }
-        ]
+        include: [Status, Task]
     })
     .then(dbUserData => {
         if (!dbUserData) {
@@ -66,42 +48,16 @@ router.post('/', (req,res) => {
     });
 });
 
-// UPDATE user's project  /api/users/task
-router.put('/task', (req, res) => {
-    // to add later: make sure session exists first
-    Post.task({ ...req.body, user_id }, {UserTask})
-        .then(updatedUserData => res.json(updatedUserData))
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
-});
-
-// UPDATE user's task /api/users/project
-router.put('/project', (req, res) => {
-    // to add later: make sure session exists first
-    Post.project({ ...req.body, user_id }, {UserProject})
-        .then(updatedUserData => res.json(updatedUserData))
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
-});
-
 // UPDATE user 
 router.put('/:id', (req, res) => {
-    User.update(
-        {
-            username: req.body.username
-        },
-        { 
-            where: {
-                id: req.params.id
-            }
+    User.update(req.body, {
+    individualHooks: true,
+        where: {
+            id: req.params.id
         }
-    )
+    })
     .then(dbUserData => {
-        if (!dbUserData) {
+        if (!dbUserData[0]) {
             res.status(404).json({ message: 'No user found with this id' });
             return;
         }

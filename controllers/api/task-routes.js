@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Task, Status, Project } = require('../../models');
+const { User, Task, Status } = require('../../models');
 
 router.get('/', (req, res) => {
   Task.findAll({
@@ -33,17 +33,19 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  Task.create({
-    task_text: req.body.task_text,
-    // TO DO: change 'body' to 'session' after implementing express-session!!!!!!!
-    //user_id: req.body.user_id
-    status_id: req.body.status_id
-  })
-  .then(dbTaskData => res.json(dbTaskData))
-  .catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
+  // if (req.session) {
+    Task.create({
+      task_text: req.body.task_text,
+      status_id: req.body.status_id,
+      // user_id: req.session.user_id
+      user_id: req.body.user_id
+    })
+    .then(dbTaskData => res.json(dbTaskData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+  // }
 });
 
 router.put('/:id', (req, res) => {

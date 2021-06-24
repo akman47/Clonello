@@ -15,10 +15,17 @@ Task.init(
       type: DataTypes.STRING,
       allowNull: false
     },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'user',
+        key: 'id'
+      }
+    },
     status_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: 1,
       references: {
         model: 'status',
         key: 'id'

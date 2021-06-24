@@ -1,12 +1,9 @@
 const router = require('express').Router();
-const { Status, Task } = require('../../models');
+const { User, Status, Task } = require('../../models');
 
 router.get('/', (req, res) => {
   Status.findAll({
-    include: {
-      model: Task,
-      attributes: ['id', 'task_text']
-    }
+    include: [User, Task]
   })
   .then(dbStatusData => res.json(dbStatusData))
   .catch(err => {
@@ -20,10 +17,7 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id
     },
-    include: {
-      model: Task,
-      attributes: ['id', 'task_text']
-    }
+    include: [User, Task]
   })
   .then(dbStatusData => res.json(dbStatusData))
   .catch(err => {
@@ -33,16 +27,18 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  if (req.session) {
+  // if (req.session) {
     Status.create({
-      status_text: req.body.status_text
+      status_text: req.body.status_text,
+      // user_id: req.session.user_id
+      user_id: req.body.user_id
     })
     .then(dbStatusData => res.json(dbStatusData))
     .catch(err => {
       console.log(err);
       res.status(400).json(err);
     });
-  }
+  // }
 });
 
 router.put('/:id', (req, res) => {
@@ -70,6 +66,13 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
+  if (Task) {
+    Task.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+  }
   Status.destroy({
     where: {
       id: req.params.id
