@@ -2,16 +2,16 @@ async function inviteUser(event) {
     event.preventDefault();
 
     user_id = document.querySelector('#invite-user-menu').getAttribute('data-user-id');
+    project_id = document.querySelector('.new-task-form').getAttribute('data-project-id');
     
     document.querySelector('.modal-invite-user').style.display="none";
     
-    // double check route/might need to redo route like ecommerce product.update and create
-    // for user id to be an array since a project can have multipe user_id
-    // refer to ecommerce Product Tag and product-routes.js
-    const response = await fetch('/api/projects', {
+    // double check route after editing models
+    const response = await fetch('/api/projects/user', {
         method: 'PUT',
         body: JSON.stringify({
-            user_id
+            user_id,
+            project_id
         }),
         headers: {
             'Content-Type': 'application/json'

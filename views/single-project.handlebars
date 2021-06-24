@@ -2,7 +2,7 @@
     <div class="modal-content">
         <div class="add-task">
             <h2>Add New Project Task</h2>
-            <form class="new-task-form">
+            <form class="new-task-form" data-project-id="{{project.id}}">
                 <div class="form-input">
                     <input type="text" id="new-task" name="new-task" placeholder="Task" />
                 </div>
@@ -18,7 +18,7 @@
                     <select name="status" id="status-menu">
                         <option disabled selected value>Select Task Status</option>
                         <!-- change these to dynamically match newly created statuses with value={{status.status_text}}  -->
-                        <option value="To Do" data-status-id={{status.id}}>To Do</option>
+                        <option value="To Do" data-status-id="{{status.id}}">To Do</option>
                         <option value="In Progress">In Progress</option>
                         <option value="Completed">Completed</option>
                         <option value="Urgent">Urgent</option>
