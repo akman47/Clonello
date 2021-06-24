@@ -7,24 +7,41 @@ async function newTaskFormHandler(event) {
 
     document.querySelector('.modal-add-task').style.display="none";
 
+    // create task
     const response = await fetch('/api/tasks', {
         method: 'POST',
         body: JSON.stringify({
             task_text,
-            user_id,
             status_id
         }),
         headers: {
             'Content-Type': 'application/json'
         }
-    });
+    })
+    .then(taskResponse => {
+
+        // get new task id
+        task_id = taskResponse.id;
+
+        // assign task to user
+        const response = await fetch('/api/tasks/user', {
+            method: 'PUT',
+            body: JSON.stringify({
+                task_id,
+                user_id
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    })
     
     if (response.ok) {
         document.location.reload();
         return;
     }
     else {
-        alert(response.statusText);
+        alert(response2.statusText);
     }
 
 }
