@@ -10,10 +10,10 @@ router.get('/', (req, res) => {
                 model: User,
                 attributes: ['id', 'username']
             },
-            {
-                model: Task,
-                attributes: ['id', 'task_text', 'status_id', 'user_id']
-            }
+            // {
+            //     model: Task,
+            //     attributes: ['id', 'task_text', 'status_id', 'user_id']
+            // }
         ]
     })
     .then(dbProjectData => res.json(dbProjectData))
@@ -35,10 +35,10 @@ router.get('/:id', (req, res) => {
                 model: User,
                 attributes: ['id', 'username']
             },
-            {
-                model: Task,
-                attributes: ['id', 'task_text', 'status_id', 'user_id']
-            }
+            // {
+            //     model: Task,
+            //     attributes: ['id', 'task_text', 'status_id', 'user_id']
+            // }
         ]
     })
     .then(dbProjectData => {
