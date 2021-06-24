@@ -18,6 +18,7 @@ Task.init(
     status_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 1,
       references: {
         model: 'status',
         key: 'id'
