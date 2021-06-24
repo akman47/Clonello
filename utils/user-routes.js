@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Project, Task, UserProject, UserTask } = require('../../models');
+const { User, Project } = require('../../models');
 
 // GET all users
 router.get('/', (req, res) => {
@@ -9,11 +9,7 @@ router.get('/', (req, res) => {
         include: [
             {
                 model: Project,
-                attributes: ['id', 'title']
-            },
-            {
-                model: Task,
-                attritubtes: ['id', 'task_text', 'status_id']
+                attributes: ['title']
             }
         ]
     })
@@ -35,12 +31,9 @@ router.get('/:id', (req, res) => {
             {
                 model: Project,
                 attributes: ['id', 'title']
-            },
-            {
-                model: Task,
-                attritubtes: ['id', 'task_text', 'status_id']
             }
         ]
+
     })
     .then(dbUserData => {
         if (!dbUserData) {
@@ -59,7 +52,10 @@ router.get('/:id', (req, res) => {
 router.post('/', (req,res) => {
     User.create({
         username: req.body.username,
+<<<<<<< HEAD
         project_id: req.body.project_id,
+=======
+>>>>>>> 2c52886ac1a58f84270fdeb9bb66cebdf3724a23
         password: req.body.password
     })
     .then(dbUserData => {
