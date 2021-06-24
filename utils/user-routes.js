@@ -1,10 +1,17 @@
 const router = require('express').Router();
-const { User, Task, Status } = require('../../models');
+const { User, Project } = require('../../models');
 
 // GET all users
 router.get('/', (req, res) => {
     User.findAll({
-        attributes: { exclude: ['password'] }
+        attributes: { exclude: ['password'] },
+        attributes: ['id', 'username'],
+        include: [
+            {
+                model: Project,
+                attributes: ['title']
+            }
+        ]
     })
     .then(dbUserData => res.json(dbUserData))
     .catch(err => {
@@ -20,7 +27,13 @@ router.get('/:id', (req, res) => {
         where: {
             id: req.params.id
         },
-        include: [Status, Task]
+        include: [
+            {
+                model: Project,
+                attributes: ['id', 'title']
+            }
+        ]
+
     })
     .then(dbUserData => {
         if (!dbUserData) {
@@ -39,16 +52,19 @@ router.get('/:id', (req, res) => {
 router.post('/', (req,res) => {
     User.create({
         username: req.body.username,
+<<<<<<< HEAD
         project_id: req.body.project_id,
+=======
+>>>>>>> 2c52886ac1a58f84270fdeb9bb66cebdf3724a23
         password: req.body.password
     })
     .then(dbUserData => {
         req.session.save(() => {
-        req.session.user_id = dbUserData.id;
-        req.session.username = dbUserData.username;
-        req.session.loggedIn = true;
+          req.session.user_id = dbUserData.id;
+          req.session.username = dbUserData.username;
+          req.session.loggedIn = true;
     
-        res.json(dbUserData);
+          res.json(dbUserData);
         });
     })
     .catch(err => {
@@ -110,7 +126,7 @@ router.put('/:id', (req, res) => {
         }
     })
     .then(dbUserData => {
-        if (!dbUserData[0]) {
+        if (!dbUserData) {
             res.status(404).json({ message: 'No user found with this id' });
             return;
         }

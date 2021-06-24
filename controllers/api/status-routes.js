@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, Status, Task } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 router.get('/', (req, res) => {
   Status.findAll({
@@ -26,8 +27,8 @@ router.get('/:id', (req, res) => {
   });
 });
 
-router.post('/', (req, res) => {
-  // if (req.session) {
+router.post('/', withAuth, (req, res) => {
+  if (req.session) {
     Status.create({
       status_text: req.body.status_text,
       // user_id: req.session.user_id
@@ -38,10 +39,10 @@ router.post('/', (req, res) => {
       console.log(err);
       res.status(400).json(err);
     });
-  // }
+  }
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
   Status.update(
     {
       status_text: req.body.status_text
@@ -65,7 +66,7 @@ router.put('/:id', (req, res) => {
   });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
   if (Task) {
     Task.destroy({
       where: {
