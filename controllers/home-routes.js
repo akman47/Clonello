@@ -1,7 +1,5 @@
 const router = require('express').Router();
-const {
-  // Project,
-  User, Task, Status } = require('../models/');
+const { User, Task, Status } = require('../models/');
 
 router.get('/', (req, res) => {
   console.log(req.session);
@@ -12,13 +10,21 @@ router.get('/', (req, res) => {
     const statuses = dbStatusData.map(status => status.get({ plain: true }));
     res.render('homepage.handlebars', {
       statuses,
-      // loggedIn: req.session.loggedIn
+      loggedIn: req.session.loggedIn
     });
   })
   .catch(err => {
     console.log(err);
     res.status(500).json(err);
   });
+});
+
+router.get('/login', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+  res.render('login');
 });
 
 router.get('/status/:id', (req, res) => {
@@ -37,7 +43,7 @@ router.get('/status/:id', (req, res) => {
     const statuses = dbStatusData.get({ plain: true });
     res.render('single-status', {
       statuses,
-      // loggedIn: req.session.loggedIn
+      loggedIn: req.session.loggedIn
     });
   })
   .catch(err => {

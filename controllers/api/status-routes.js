@@ -20,7 +20,13 @@ router.get('/:id', (req, res) => {
     },
     include: [User, Task]
   })
-  .then(dbStatusData => res.json(dbStatusData))
+  .then(dbStatusData => {
+    if (!dbStatusData) {
+      res.status(404).json({ message: 'No status found with this id' });
+      return;
+    }
+    res.json(dbStatusData)
+  })
   .catch(err => {
     console.log(err);
     res.status(500).json(err);
@@ -31,8 +37,7 @@ router.post('/', withAuth, (req, res) => {
   if (req.session) {
     Status.create({
       status_text: req.body.status_text,
-      // user_id: req.session.user_id
-      user_id: req.body.user_id
+      user_id: req.session.user_id
     })
     .then(dbStatusData => res.json(dbStatusData))
     .catch(err => {

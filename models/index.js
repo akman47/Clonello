@@ -1,6 +1,6 @@
 const User = require('./User.js');
-const Task = require('./Task.js');
 const Status = require('./Status.js');
+const Task = require('./Task.js');
 
 User.hasMany(Status);
 Status.belongsTo(User);

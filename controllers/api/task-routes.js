@@ -35,19 +35,18 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  // if (req.session) {
+  if (req.session) {
     Task.create({
       task_text: req.body.task_text,
       status_id: req.body.status_id,
-      // user_id: req.session.user_id
-      user_id: req.body.user_id
+      user_id: req.session.user_id
     })
     .then(dbTaskData => res.json(dbTaskData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
     });
-  // }
+  }
 });
 
 router.put('/:id', withAuth, (req, res) => {
