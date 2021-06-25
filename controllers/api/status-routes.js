@@ -1,12 +1,29 @@
 const router = require('express').Router();
-const { Status, Task } = require('../../models');
+const { User, Task, Project, Status } = require('../../models');
+const withAuth = require('../../utils/auth');
+
 
 router.get('/', (req, res) => {
   Status.findAll({
-    include: {
-      model: Task,
-      attributes: ['id', 'task_text']
-    }
+    include: [
+      {
+        model: Task,
+        include: [
+          {
+            model: User,
+            attributes: ['username']
+          },
+          {
+            model: Project,
+            attributes: ['title'],
+            include: {
+              model: User,
+              attributes: ['username']
+            }
+          }
+        ]
+      }
+    ]
   })
   .then(dbStatusData => res.json(dbStatusData))
   .catch(err => {
@@ -20,12 +37,33 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id
     },
-    include: {
-      model: Task,
-      attributes: ['id', 'task_text']
-    }
+    include: [
+      {
+        model: Task,
+        include: [
+          {
+            model: User,
+            attributes: ['username']
+          },
+          {
+            model: Project,
+            attributes: ['title'],
+            include: {
+              model: User,
+              attributes: ['username']
+            }
+          }
+        ]
+      }
+    ]
   })
-  .then(dbStatusData => res.json(dbStatusData))
+  .then(dbStatusData => {
+    if (!dbStatusData) {
+      res.status(404).json({ message: 'No status found with this id' });
+      return;
+    }
+    res.json(dbStatusData)
+  })
   .catch(err => {
     console.log(err);
     res.status(500).json(err);
@@ -35,20 +73,20 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   if (req.session) {
     Status.create({
-      status_text: req.body.status_text
+      title: req.body.title
     })
     .then(dbStatusData => res.json(dbStatusData))
     .catch(err => {
       console.log(err);
-      res.status(400).json(err);
+      res.status(500).json(err);
     });
   }
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
   Status.update(
     {
-      status_text: req.body.status_text
+      title: req.body.title
     },
     {
       where: {
@@ -69,7 +107,7 @@ router.put('/:id', (req, res) => {
   });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
   Status.destroy({
     where: {
       id: req.params.id
@@ -77,7 +115,7 @@ router.delete('/:id', (req, res) => {
   })
   .then(dbStatusData => {
     if (!dbStatusData) {
-      res.status(404).json({ message: 'No Status found with this id' });
+      res.status(404).json({ message: 'No status found with this id' });
       return;
     }
     res.json(dbStatusData);
