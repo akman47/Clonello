@@ -6,8 +6,7 @@ async function inviteUser(event) {
     
     document.querySelector('.modal-invite-user').style.display="none";
     
-    // double check route after editing models
-    const response = await fetch('/api/projects/user', {
+    const response = await fetch('/api/projects/invite', {
         method: 'PUT',
         body: JSON.stringify({
             user_id,

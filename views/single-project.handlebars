@@ -38,7 +38,7 @@
             <form class="add-user-form">
                 <div class="form-input user-menu">
                     <label for="invite-user-menu">Choose a user to invite: </label>
-                    <select name="invite-user-menu" id="invite-user-menu">
+                    <select name="invite-user-menu" id="invite-user-menu" data-project-id="{{project.id}}">
                         {{!-- {{#each user}} will need to push getAll user data to display here--}}
                         <option value="{{user.username}}" data-user-id:"{{user.id}}">{{user.username}}</option>
                         {{!-- {{/each}} --}}
@@ -68,6 +68,10 @@
             <td>{{task}}</td>
             <td>{{user.username}}</td>
             <td>{{status}}</td>
+            <td>
+                <button type="button" class="btn btn-edit">Edit Task</button>
+                <button type="button" class="btn btn-delete" data-task-id="{{task.id}}">Delete Task</button>
+            </td>
         </tr>
         {{/each}}
     </table>

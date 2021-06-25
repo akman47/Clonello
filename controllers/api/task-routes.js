@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Task, Status } = require('../../models');
+const { User, Task, Status, UserTask } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 
@@ -40,6 +40,19 @@ router.post('/', withAuth, (req, res) => {
     // TO DO: change 'body' to 'session' after implementing express-session!!!!!!!
     //user_id: req.body.user_id
     status_id: req.body.status_id
+  })
+  .then(dbTaskData => res.json(dbTaskData))
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
+});
+
+//PUT /api/tasks/assign assigns user to task
+router.put('/assign', (req, res) => {
+  UserTask.create({
+    user_id: req.body.user_id,
+    task_id: req.body.task_id
   })
   .then(dbTaskData => res.json(dbTaskData))
   .catch(err => {

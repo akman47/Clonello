@@ -24,7 +24,7 @@ async function newTaskFormHandler(event) {
         task_id = taskResponse.id;
 
         // assign task to user
-        const response = await fetch('/api/tasks/user', {
+        const response = await fetch('/api/tasks/assign', {
             method: 'PUT',
             body: JSON.stringify({
                 task_id,
@@ -41,7 +41,7 @@ async function newTaskFormHandler(event) {
         return;
     }
     else {
-        alert(response2.statusText);
+        alert(response.statusText);
     }
 
 }

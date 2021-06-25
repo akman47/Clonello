@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Task, Project } = require('../../models/');
+const { User, Task, Project, UserProject } = require('../../models/');
 const withAuth = require('../../utils/auth');
 
 // GET all projects
@@ -11,10 +11,10 @@ router.get('/', (req, res) => {
                 model: User,
                 attributes: ['id', 'username']
             },
-            // {
-            //     model: Task,
-            //     attributes: ['id', 'task_text', 'status_id', 'user_id']
-            // }
+            {
+                model: Task,
+                attributes: ['id', 'task_text', 'status_id']
+            }
         ]
     })
     .then(dbProjectData => res.json(dbProjectData))
@@ -36,10 +36,10 @@ router.get('/:id', (req, res) => {
                 model: User,
                 attributes: ['id', 'username']
             },
-            // {
-            //     model: Task,
-            //     attributes: ['id', 'task_text', 'status_id', 'user_id']
-            // }
+            {
+                model: Task,
+                attributes: ['id', 'task_text', 'status_id', 'user_id']
+            }
         ]
     })
     .then(dbProjectData => {
@@ -65,6 +65,19 @@ router.post('/', withAuth, (req, res) => {
         console.log(err);
         res.status(500).json(err);
     });
+});
+
+// api/project/invite Invite User to Project
+router.put('/invite', (req, res) => {
+    UserProject.create({
+        user_id: req.body.user_id,
+        project_id: req.body.project_id
+    })
+    .then(dbProjectData => res.json(dbProjectData))
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
 });
 
 // EDIT project
