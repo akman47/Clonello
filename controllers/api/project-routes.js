@@ -4,6 +4,7 @@ const withAuth = require('../../utils/auth');
 
 router.get('/', (req, res) => {
   Project.findAll({
+    attributes: ['id', 'title'],
     include: [
       {
         model: User,
@@ -11,16 +12,8 @@ router.get('/', (req, res) => {
       },
       {
         model: Task,
-        attributes: ['task_text'],
+        attributes: ['id', 'task_text'],
         include: [
-          {
-            model: User,
-            attributes: ['username']
-          },
-          {
-            model: Project,
-            attributes: ['title']
-          },
           {
             model: Status,
             attributes: ['title']
@@ -41,6 +34,7 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id
     },
+    attributes: ['id', 'title'],
     include: [
       {
         model: User,
@@ -48,16 +42,8 @@ router.get('/:id', (req, res) => {
       },
       {
         model: Task,
-        attributes: ['task_text'],
+        attributes: ['id', 'task_text'],
         include: [
-          {
-            model: User,
-            attributes: ['username']
-          },
-          {
-            model: Project,
-            attributes: ['title']
-          },
           {
             model: Status,
             attributes: ['title']
