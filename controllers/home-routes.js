@@ -41,7 +41,7 @@ router.get('/project/:id', (req, res) => {
     }
 
     const projects = dbProjectData.get({ plain: true });
-    res.render('single-project.handlebars', {
+    res.render('single-project', {
       projects,
       loggedIn: req.session.loggedIn
     });

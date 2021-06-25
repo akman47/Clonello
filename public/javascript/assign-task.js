@@ -6,7 +6,7 @@ async function assignTaskToUser(event) {
     //user_id = document.querySelector('#user-menu').getAttribute('data-user-id');
     //task_id = document.querySelector().getAttribute('data-task-id');
 
-    const response = await fetch('/api/tasks/user', {
+    const response = await fetch('/api/tasks/assign', {
         method: 'PUT',
         body: JSON.stringify({
             task_id,
