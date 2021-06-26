@@ -41,7 +41,7 @@ router.get('/edit/:id', withAuth, async (req, res) => {
   const dbUserData = await User.findAll(
     {
       attributes: ['id', 'username']
-   }
+    }
   );
 
   const dbStatusData = await Status.findAll(

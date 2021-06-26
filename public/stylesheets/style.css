@@ -87,7 +87,7 @@ header nav ul li {
     margin: 5px;
 }
 
-#signup, #login {
+#signup-btn, #login-btn {
     margin-top: 10px;
     font-weight: bold;
 }
