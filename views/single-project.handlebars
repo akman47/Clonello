@@ -3,13 +3,13 @@
     <div class="modal-content">
         <div class="invite-user">
             <h2>Invite New Project Member</h2>
-            <form class="add-user-form">
+            <form class="add-user-form" data-project-id="{{project.id}}">
                 <div class="form-input user-menu">
                     <label for="invite-user-menu">Choose a user to invite: </label>
                     <select name="invite-user-menu" id="invite-user-menu">
-                        {{!-- {{#each project.users}} will need to push getAll user data to display here--}}
-                        <option value="{{username}}" data-user-id:"{{id}}">{{username}}</option>
-                        {{!-- {{/each}} --}}
+                        {{#each users}}
+                        <option value="{{username}}-id{{id}}">{{username}}</option>
+                        {{/each}}
                     </select>
                 </div>
                 <button type="submit" class="btn btn-invite-user">Add User</button>
@@ -25,6 +25,7 @@
     <a class="back" href="/dashboard"> &larr; Back to Dashboard</a>
     <div class="project-header">
         {{log project}}
+        {{!-- {{log project.task[0].status}} --}}
         <h2>{{project.title}}</h2>
         <button type="button" class="btn btn-open-invite-modal">Invite Project Member</button>
     </div>
@@ -37,8 +38,10 @@
         {{#each project.tasks}}
         <tr>
             <td>{{task_text}}</td>
-            <td>{{user.username}}</td>
-            <td>{{status}}</td>
+            {{#each users}}
+            <td>{{username}}</td>
+            {{/each}}
+            <td>{{status.title}}</td>
             <td>
                 <button type="button" class="btn btn-edit" data-task-id="{{id}}">Edit Task</button>
                 <button type="button" class="btn btn-delete" data-task-id="{{id}}">Delete Task</button>
@@ -61,18 +64,16 @@
                     <select name="user-menu" id="task-user-menu">
                         <option disabled selected value>Assign Task To: </option>
                         {{#each project.users}}
-                        <option value="{{username}}" data-user-id="{{id}}">{{username}}</option>
+                        <option value="{{username}}-id{{id}}">{{username}}</option>
                         {{/each}}
                     </select>
                 </div>
                 <div class="form-input status-menu">
-                    <select name="status" id="status-menu">
+                    <select name="status-menu" id="status-menu">
                         <option disabled selected value>Select Task Status</option>
-                        <!-- change these to dynamically match newly created statuses with value={{status.status_text}}  -->
-                        <option value="To Do" data-status-id="{{status.id}}">To Do</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Completed">Completed</option>
-                        <option value="Urgent">Urgent</option>
+                        {{#each status}}
+                        <option value="{{title}}-id{{id}}">{{title}}</option>
+                        {{/each}}
                     </select>
                 </div>
                 <button type="submit" class="btn" id="btn-add-task">Add Task</button>
