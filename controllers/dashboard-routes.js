@@ -1,15 +1,25 @@
 const router = require('express').Router();
-const { User, Task, Project } = require('../models/');
+const { User, Task, Project, Status } = require('../models/');
 const withAuth = require('../utils/auth.js');
+const sequelize = require('../config/connection');
 
 router.get('/', withAuth, (req, res) => {
   console.log(req.session);
-  Project.findAll({
-    where: {
-      user_id: req.session.user_id
+  User.findOne(
+    {
+      where: {
+        id: req.session.user_id
+      }
     },
-    include: [User, Task]
-  })
+    {
+      attributes: [
+        'id',
+        'username',
+        [sequelize.literal('SELECT * FROM user_project WHERE user_id = project.user_id)')]
+      ],
+      include: [Project, Task]
+    }
+  )
   .then(dbProjectData => {
     const projects = dbProjectData.map(project => project.get({ plain: true }));
     res.render('dashboard', {
@@ -24,11 +34,26 @@ router.get('/', withAuth, (req, res) => {
 });
 
 router.get('/edit/:id', withAuth, (req, res) => {
-  Task.findOne({
+  Project.findOne({
     where: {
       id: req.params.id
     },
-    include: [User, Project]
+    include: [
+      {
+        model: User,
+        attributes: ['id', 'username']
+      },
+      {
+        model: Task,
+        attributes: ['id', 'task_text', 'status_id'],
+        include: [
+          {
+            model: Status,
+            attributes: ['id', 'title']
+          }
+        ]
+      }
+    ]
   })
   .then(dbTaskData => {
     if (!dbTaskData) {
@@ -36,9 +61,9 @@ router.get('/edit/:id', withAuth, (req, res) => {
       return;
     }
 
-    const task = dbTaskData.get({ plain: true });
-    res.render('edit-task', {
-      task,
+    const project = dbTaskData.get({ plain: true });
+    res.render('single-project', {
+      project,
       loggedIn: true
     });
   })
