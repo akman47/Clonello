@@ -1,19 +1,32 @@
 const router = require('express').Router();
-const { User, Task, Project } = require('../models/');
+const { User, Task, Project, Status } = require('../models/');
 const withAuth = require('../utils/auth.js');
 
 router.get('/', withAuth, (req, res) => {
   console.log(req.session);
-  Project.findAll({
-    where: {
-      user_id: req.session.user_id
+  User.findOne(
+    {
+      where: {
+        id: req.session.user_id
+      },
+      include: [
+        { 
+          model: Project,
+          attributes: ['id', 'title'],
+          include: [
+            {
+              model: Task,
+              attributes: ['id', 'task_text', 'status_id']
+            }
+          ]
+        }
+      ]
     },
-    include: [User, Task]
-  })
-  .then(dbProjectData => {
-    const projects = dbProjectData.map(project => project.get({ plain: true }));
+  )
+  .then(dbUserData => {
+    const user = dbUserData.get({ plain: true });
     res.render('dashboard', {
-      projects,
+      user,
       loggedIn: true
     });
   })
@@ -23,28 +36,76 @@ router.get('/', withAuth, (req, res) => {
   });
 });
 
-router.get('/edit/:id', withAuth, (req, res) => {
-  Task.findOne({
-    where: {
-      id: req.params.id
-    },
-    include: [User, Project]
-  })
-  .then(dbTaskData => {
-    if (!dbTaskData) {
-      res.status(404).json({ message: 'No task found with this id' });
-      return;
+router.get('/edit/:id', withAuth, async (req, res) => {
+  
+  const dbUserData = await User.findAll(
+    {
+      attributes: ['id', 'username']
     }
+  );
 
-    const task = dbTaskData.get({ plain: true });
-    res.render('edit-task', {
-      task,
-      loggedIn: true
-    });
+  const dbStatusData = await Status.findAll(
+    {
+      attributes: ['id', 'title']
+    }
+  );
+
+  const dbTaskData = await Project.findOne(
+    {
+      where: {
+        id: req.params.id
+    },
+    include: [
+      {
+        model: User,
+        attributes: ['id', 'username']
+      },
+      {
+        model: Task,
+        attributes: ['id', 'task_text', 'status_id'],
+        include: [
+          {
+            model: Status,
+            attributes: ['id', 'title']
+          },
+          {
+            model: User,
+            attributes: ['id', 'username']
+          }
+        ]
+      }
+    ]
   })
-  .catch(err => {
-    console.log(err);
+
+  if (!dbTaskData) {
+    res.status(404).json({ message: 'No task found with this id' });
+    return;
+  }
+
+  if (!dbUserData) {
+    res.status(404).json(err);
+    return;
+  }
+
+  if (!dbStatusData) {
     res.status(500).json(err);
+    return;
+  }
+
+  const users = dbUserData.map(user => user.get({ plain: true }));
+  const project = dbTaskData.get({ plain: true });
+  const status = dbStatusData.map(stat => stat.get({ plain: true }));
+
+  //push project task to show only one user
+  // project.user = {
+  //   username: project.tasks.users[0]
+  // }
+
+  res.render('single-project', {
+    project,
+    users,
+    status,
+    loggedIn: true
   });
 })
 

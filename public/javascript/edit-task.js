@@ -1,10 +1,12 @@
 async function editTaskFormHandler(event) {
     event.preventDefault();
 
-    task_id = document.querySelector('#status-menu').getAttribute('data-task-id');
+    task_id = event.target.getAttribute('data-task-id');
     // fill in element ids
     task_text = document.querySelector('').value;
-    status_id = document.querySelector('').getAttribute('data-status-id');
+    status_id = document.querySelector('[name="status-menu"]').value.split('-id')[1];
+
+    console.log('click'+task_id);
 
     const response = await fetch(`/api/tasks/${task_id}`, {
         method: 'PUT',
@@ -24,8 +26,6 @@ async function editTaskFormHandler(event) {
     else {
         alert(response.statusText);
     }
-
 }
 
-// fill in element id
-document.querySelector('').addEventListener('click', editTaskFormHandler);
+document.querySelectorAll('.btn-edit').forEach(btn => btn.addEventListener('click', editTaskFormHandler));

@@ -2,13 +2,15 @@ async function newTaskFormHandler(event) {
     event.preventDefault();
 
     task_text = document.querySelector('#new-task').value.trim();
-    user_id = document.querySelector('#task-user-menu').getAttribute('data-user-id');
-    status_id = document.querySelector('#status-menu').getAttribute('data-status-id');
+    user_id = document.querySelector('[name="user-menu"]').value.split('-id')[1];
+    status_id = document.querySelector('[name="status-menu"]').value.split('-id')[1];
+
+    console.log(task_text, user_id, status_id);
 
     document.querySelector('.modal-add-task').style.display="none";
 
     // create task
-    const response = await fetch('/api/tasks', {
+    const taskResponse = await fetch('/api/tasks', {
         method: 'POST',
         body: JSON.stringify({
             task_text,
@@ -18,13 +20,15 @@ async function newTaskFormHandler(event) {
             'Content-Type': 'application/json'
         }
     })
+
+    console.log(taskResponse);
     
-    if (response.ok) {
-        // get new task id
-        task_id = response.id;
+    if (taskResponse.ok) {
+        // get new task id  --- need to figure this one out
+        const task_id = taskResponse.id;
 
         // assign task to user
-        const response = await fetch('/api/tasks/assign', {
+        const userResponse = await fetch('/api/tasks/assign', {
             method: 'PUT',
             body: JSON.stringify({
                 task_id,
@@ -38,7 +42,7 @@ async function newTaskFormHandler(event) {
         return;
     }
     else {
-        alert(response.statusText);
+        alert(taskResponse.statusText);
     }
 
 }

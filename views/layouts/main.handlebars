@@ -14,10 +14,12 @@
         <a href="/">Clonello</a>
       </h1>
       <nav>
+        <ul>
         {{#if loggedIn}}
-        <a href="/dashboard">Dashboard</a>
-        <button id="logout">Logout</button>
+          <li><a href="/dashboard">Dashboard</a></li>
+          <li id="logout">Logout</li>
         {{/if}}
+        </ul>
       </nav>
     </header>
     <main>

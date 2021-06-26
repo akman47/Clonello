@@ -1,9 +1,11 @@
 async function inviteUser(event) {
     event.preventDefault();
 
-    user_id = document.querySelector('#invite-user-menu').getAttribute('data-user-id');
-    project_id = document.querySelector('.new-task-form').getAttribute('data-project-id');
+    user_id = document.querySelector('[name="invite-user-menu"]').value.split('-id')[1];
+    project_id = document.querySelector('.add-user-form').getAttribute('data-project-id');
     
+    console.log("user:", user_id, "project:", project_id);
+
     document.querySelector('.modal-invite-user').style.display="none";
     
     const response = await fetch('/api/projects/invite', {
@@ -18,7 +20,7 @@ async function inviteUser(event) {
     });
 
     if (response.ok) {
-        document.location.replace('/single-project');
+        document.location.reload();
         return;
     }
     else {
