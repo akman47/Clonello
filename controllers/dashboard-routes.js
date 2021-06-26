@@ -9,19 +9,32 @@ router.get('/', withAuth, (req, res) => {
     {
       where: {
         id: req.session.user_id
-      }
+      },
+      include: [
+        { 
+          model: Project,
+          attributes: ['id', 'title'],
+          include: [
+            {
+              model: Task,
+              attributes: ['id', 'task_text', 'status_id']
+            }
+          ]
+        }
+      ]
     },
-    {
-      attributes: [
-        'id',
-        'username',
-        [sequelize.literal('SELECT * FROM user_project WHERE user_id = project.user_id)')]
-      ],
-      include: [Project, Task]
-    }
+    // {
+    //   attributes: [
+    //     'id',
+    //     'username',
+    //     // On the right path... need to pull all the projects for logged in user
+    //     [sequelize.literal('SELECT * FROM user_project WHERE user_id = project.user_id)')]
+    //   ],
+    //   include: [Project, Task]
+    // }
   )
   .then(dbProjectData => {
-    const projects = dbProjectData.map(project => project.get({ plain: true }));
+    const projects = dbProjectData.get({ plain: true });
     res.render('dashboard', {
       projects,
       loggedIn: true
