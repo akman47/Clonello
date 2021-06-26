@@ -39,10 +39,10 @@ router.get('/project/:id', (req, res) => {
       res.status(404).json({ message: 'No project found with this id' });
       return;
     }
-
-    const projects = dbProjectData.get({ plain: true });
+    
+    const tasks = dbProjectData.get({ plain: true });
     res.render('single-project', {
-      projects,
+      tasks,
       loggedIn: req.session.loggedIn
     });
   })

@@ -6,7 +6,6 @@ async function inviteUser(event) {
     
     document.querySelector('.modal-invite-user').style.display="none";
     
-    // double check route after editing models
     const response = await fetch('/api/projects/invite', {
         method: 'PUT',
         body: JSON.stringify({
@@ -41,4 +40,4 @@ function closeInviteModal (event) {
 
 document.querySelector('.btn-invite-user').addEventListener('click', inviteUser);
 document.querySelector('.btn-open-invite-modal').addEventListener('click', openInviteModal);
-document.querySelectory('.btn-close-invite-modal').addEventListener('click', closeInviteModal);
+document.querySelector('.btn-close-invite-modal').addEventListener('click', closeInviteModal);

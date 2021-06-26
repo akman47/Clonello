@@ -23,6 +23,27 @@ body {
     border-radius: 5px;
 }
 
-.modal-add-task, .modal-invite-user {
+.form-input {
+    margin: 6px;
+}
+
+/* single-project view */
+.modal-invite-user, .modal-add-task {
     display: none;
+    position: fixed;
+    z-index: 1;
+    width: 30%;
+    height: 20%;
+    overflow: auto;
+    align-items: center;
+    background-color: rgba(37, 71, 71, 0.8);
+    color: var(--white);
+}
+
+.add-task {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+    margin: 10px;
 }

@@ -2,7 +2,7 @@ async function newTaskFormHandler(event) {
     event.preventDefault();
 
     task_text = document.querySelector('#new-task').value.trim();
-    user_id = document.querySelector('#user-menu').getAttribute('data-user-id');
+    user_id = document.querySelector('#task-user-menu').getAttribute('data-user-id');
     status_id = document.querySelector('#status-menu').getAttribute('data-status-id');
 
     document.querySelector('.modal-add-task').style.display="none";
@@ -18,13 +18,13 @@ async function newTaskFormHandler(event) {
             'Content-Type': 'application/json'
         }
     })
-    .then(taskResponse => {
-
+    
+    if (response.ok) {
         // get new task id
-        task_id = taskResponse.id;
+        task_id = response.id;
 
         // assign task to user
-        const response = await fetch('/api/tasks/user', {
+        const response = await fetch('/api/tasks/assign', {
             method: 'PUT',
             body: JSON.stringify({
                 task_id,
@@ -33,15 +33,12 @@ async function newTaskFormHandler(event) {
             headers: {
                 'Content-Type': 'application/json'
             }
-        });
-    })
-    
-    if (response.ok) {
+        })
         document.location.reload();
         return;
     }
     else {
-        alert(response2.statusText);
+        alert(response.statusText);
     }
 
 }
@@ -58,6 +55,6 @@ function closeTaskModal (event) {
     document.querySelector('.modal-add-task').style.display="none";
 };
 
-document.querySelector('.btn-add-task').addEventListener('click', newTaskFormHandler);
-document.querySelector('.btn-open-task-modal').addEventListener('click', openTaskModal);
-document.querySelector('.btn-close-modal').addEventListener('click', closeTaskModal);
+document.querySelector('#btn-add-task').addEventListener('click', newTaskFormHandler);
+document.querySelector('#open-task-modal').addEventListener('click', openTaskModal);
+document.querySelector('#close-task-modal').addEventListener('click', closeTaskModal);
