@@ -40,9 +40,9 @@ router.get('/project/:id', (req, res) => {
       return;
     }
     
-    const tasks = dbProjectData.get({ plain: true });
+    const projects = dbProjectData.get({ plain: true });
     res.render('single-project', {
-      tasks,
+      projects,
       loggedIn: req.session.loggedIn
     });
   })

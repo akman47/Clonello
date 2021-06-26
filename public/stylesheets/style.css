@@ -14,6 +14,55 @@ body {
     background-color: var(--lightgreen);
 }
 
+header {
+    padding: 20px 15px;
+    background-color:mediumslateblue;
+    color: var(--white);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+}
+
+#description {
+    font-size: 20px;
+    padding: 25px;
+}
+
+.account-header h2 {
+    margin-top: 35px;
+}
+
+
+/* log in and sign up style */
+.account {
+    text-align: center;
+    padding: 30px 50px;
+}
+
+.account h2 {
+    margin-bottom: 5px;
+}
+
+.login-form, .signup-form {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+}
+
+#signup, #login {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+
+/* utils */
 .btn {
     background-color: var(--blue);
     color: var(--white);

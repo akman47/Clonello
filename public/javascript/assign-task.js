@@ -3,8 +3,8 @@ async function assignTaskToUser(event) {
     event.preventDefault();
     
     // insert element ids after creating buttons/page
-    //user_id = document.querySelector('#user-menu').getAttribute('data-user-id');
-    //task_id = document.querySelector().getAttribute('data-task-id');
+    user_id = document.querySelector('').getAttribute('data-user-id');
+    task_id = document.querySelector('').getAttribute('data-task-id');
 
     const response = await fetch('/api/tasks/assign', {
         method: 'PUT',
