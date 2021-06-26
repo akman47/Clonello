@@ -24,7 +24,7 @@ async function newTaskFormHandler(event) {
     console.log(taskResponse);
     
     if (taskResponse.ok) {
-        // get new task id
+        // get new task id  --- need to figure this one out
         const task_id = taskResponse.id;
 
         // assign task to user

@@ -4,7 +4,7 @@ async function editTaskFormHandler(event) {
     task_id = event.target.getAttribute('data-task-id');
     // fill in element ids
     task_text = document.querySelector('').value;
-    status_id = document.querySelector('').getAttribute('data-status-id');
+    status_id = document.querySelector('[name="status-menu"]').value.split('-id')[1];
 
     console.log('click'+task_id);
 

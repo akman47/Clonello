@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { User, Task, Project, Status } = require('../models/');
 const withAuth = require('../utils/auth.js');
-const sequelize = require('../config/connection');
 
 router.get('/', withAuth, (req, res) => {
   console.log(req.session);
@@ -23,15 +22,6 @@ router.get('/', withAuth, (req, res) => {
         }
       ]
     },
-    // {
-    //   attributes: [
-    //     'id',
-    //     'username',
-    //     // On the right path... need to pull all the projects for logged in user
-    //     [sequelize.literal('SELECT * FROM user_project WHERE user_id = project.user_id)')]
-    //   ],
-    //   include: [Project, Task]
-    // }
   )
   .then(dbUserData => {
     const user = dbUserData.get({ plain: true });
