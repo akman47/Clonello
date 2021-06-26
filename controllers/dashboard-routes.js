@@ -33,10 +33,10 @@ router.get('/', withAuth, (req, res) => {
     //   include: [Project, Task]
     // }
   )
-  .then(dbProjectData => {
-    const projects = dbProjectData.get({ plain: true });
+  .then(dbUserData => {
+    const user = dbUserData.get({ plain: true });
     res.render('dashboard', {
-      projects,
+      user,
       loggedIn: true
     });
   })

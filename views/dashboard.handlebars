@@ -1,3 +1,6 @@
 <p>Hello World</p>
-{{log projects}}
-{{log projects.tasks}}
+{{log user}}
+{{#each user.projects}}
+<li>{{title}}</li>
+<p>{{tasks.length}}</p>
+{{/each}}
