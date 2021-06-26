@@ -2,8 +2,8 @@ const User = require('./User.js');
 const Project = require('./Project.js');
 const Task = require('./Task.js');
 const Status = require('./Status.js');
-const UserProject = require('./UserProject');
-const UserTask = require('./UserTask');
+const UserTask = require('./UserTask.js');
+const UserProject = require('./UserProject.js');
 
 User.belongsToMany(Task, {
   through: UserTask
