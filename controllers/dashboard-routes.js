@@ -12,7 +12,7 @@ router.get('/', withAuth, (req, res) => {
   })
   .then(dbProjectData => {
     const projects = dbProjectData.map(project => project.get({ plain: true }));
-    res.render('dashboard.handlebars', {
+    res.render('dashboard', {
       projects,
       loggedIn: true
     });

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Project, Task, Status } = require('../../models');
+const { User, Project, Task, Status, UserProject } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.get('/', (req, res) => {
@@ -77,6 +77,18 @@ router.post('/', withAuth, (req, res) => {
       res.status(400).json(err);
     });
   }
+});
+
+router.put('/invite', (req, res) => {
+  UserProject.create({
+    user_id: req.body.user_id,
+    project_id: req.body.project_id
+  })
+  .then(dbProjectData => res.json(dbProjectData))
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
 });
 
 router.put('/:id', withAuth, (req, res) => {

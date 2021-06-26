@@ -39,9 +39,9 @@ router.get('/project/:id', (req, res) => {
       res.status(404).json({ message: 'No project found with this id' });
       return;
     }
-
+    
     const projects = dbProjectData.get({ plain: true });
-    res.render('single-project.handlebars', {
+    res.render('single-project', {
       projects,
       loggedIn: req.session.loggedIn
     });

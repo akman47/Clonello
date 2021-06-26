@@ -1,0 +1,98 @@
+:root {
+    --white: #f5f5f5;
+    --blue: #1e6dff;
+    --lightgreen: #83cfac;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: var(--lightgreen);
+}
+
+header {
+    padding: 20px 15px;
+    background-color:mediumslateblue;
+    color: var(--white);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+}
+
+#description {
+    font-size: 20px;
+    padding: 25px;
+}
+
+.account-header h2 {
+    margin-top: 35px;
+}
+
+
+/* log in and sign up style */
+.account {
+    text-align: center;
+    padding: 30px 50px;
+}
+
+.account h2 {
+    margin-bottom: 5px;
+}
+
+.login-form, .signup-form {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+}
+
+#signup, #login {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+
+/* utils */
+.btn {
+    background-color: var(--blue);
+    color: var(--white);
+    font-weight: bold;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.form-input {
+    margin: 6px;
+}
+
+/* single-project view */
+.modal-invite-user, .modal-add-task {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    width: 30%;
+    height: 20%;
+    overflow: auto;
+    align-items: center;
+    background-color: rgba(37, 71, 71, 0.8);
+    color: var(--white);
+}
+
+.add-task {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+    margin: 10px;
+}
