@@ -1,8 +1,9 @@
 async function deleteTask(event) {
     event.preventDefault();
 
-    // add element id
-    task_id = document.querySelector('').getAttribute('data-task-id');
+    task_id = event.target.getAttribute('data-task-id');
+
+    console.log('click'+ task_id);
 
     const response = await fetch(`/api/tasks/${task_id}`, {
         method: 'DELETE'
@@ -17,5 +18,4 @@ async function deleteTask(event) {
     }
 }
 
-// add element id
-document.querySelector('').addEventListener('click', deleteTask);
+document.querySelectorAll('.btn-delete').forEach(btn => btn.addEventListener('click', deleteTask));
