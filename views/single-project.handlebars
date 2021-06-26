@@ -40,8 +40,8 @@
             <td>{{user.username}}</td>
             <td>{{status}}</td>
             <td>
-                <button type="button" class="btn btn-edit">Edit Task</button>
-                <button type="button" class="btn btn-delete" data-task-id="{{task.id}}">Delete Task</button>
+                <button type="button" class="btn btn-edit" data-task-id="{{id}}">Edit Task</button>
+                <button type="button" class="btn btn-delete" data-task-id="{{id}}">Delete Task</button>
             </td>
         </tr>
         {{/each}}
@@ -84,3 +84,5 @@
 
 <script src="/javascript/invite-user.js"></script>
 <script src="/javascript/add-task.js"></script>
+<script src="/javascript/delete-task.js"></script>
+<script src="/javascript/edit-task.js"></script>
