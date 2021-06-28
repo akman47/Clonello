@@ -7,7 +7,7 @@ async function newTaskFormHandler(event) {
     const project_id = window.location.toString().split('/')[
         window.location.toString().split('/').length-1];
 
-    console.log(task_text, user_id, status_id);
+    //console.log(task_text, user_id, status_id);
 
     document.querySelector('.modal-add-task').style.display="none";
 
@@ -23,8 +23,6 @@ async function newTaskFormHandler(event) {
             'Content-Type': 'application/json'
         }
     })
-
-    console.log(taskResponse);
     
     if (taskResponse.ok) {
         getNewTaskId(user_id);
@@ -32,7 +30,6 @@ async function newTaskFormHandler(event) {
     else {
         alert(taskResponse.statusText);
     }
-
 }
 
 function getNewTaskId(user) {
@@ -42,10 +39,10 @@ function getNewTaskId(user) {
                 return response.json()
             })
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 const newTask = data.length -1;
                 const task_id = data[newTask].id;
-                console.log(task_id);
+                //console.log(task_id);
                 assignUser(task_id, user_id);
             });
 }
