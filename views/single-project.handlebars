@@ -19,13 +19,11 @@
     </div>
 </section>
 
-
 {{!-- main single-project view --}}
 <section>
     <a class="back" href="/dashboard"> &larr; Back to Dashboard</a>
     <div class="project-header">
         {{!-- {{log project}} --}}
-        {{!-- {{log project.task[0].status}} --}}
         <h2>{{project.title}}</h2>
         <button type="button" class="btn btn-open-invite-modal">Invite Project Member</button>
     </div>
@@ -82,38 +80,6 @@
         </div>
     </div>
 </section>
-
-{{!-- edit task modal
-<section class="modal-edit-task">
-        <div class="edit-task">
-            <h2>Edit Task</h2>
-            <form class="edit-task-form" data-project-id="{{project.id}}">
-                <div class="form-input">
-                    <input type="text" id="edit-task" name="edit-task"/>
-                </div>
-                <div class="form-input user-menu">
-                    <select name="user-menu" id="task-user-menu">
-                        <option disabled selected value>Assign Task To: </option>
-                        {{#each project.users}}
-                        <option value="{{username}}-id{{id}}">{{username}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-                <div class="form-input status-menu">
-                    <select name="status-menu" id="status-menu">
-                        <option disabled selected value>Select Task Status</option>
-                        {{#each status}}
-                        <option value="{{title}}-id{{id}}">{{title}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-                <button type="submit" class="btn" id="btn-save-task">Save Task</button>
-                <button type="button" class="btn" id="close-edit-modal">Close</button>
-            </form>
-        </div>
-    </div>
-</section> --}}
-
 
 <script src="/javascript/invite-user.js"></script>
 <script src="/javascript/add-task.js"></script>
