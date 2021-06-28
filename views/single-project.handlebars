@@ -37,9 +37,9 @@
         <tr>
             <td class="task-text-{{id}}" data-task-id="{{id}}">{{task_text}}</td>
             {{#each users}}
-            <td class="task-user" data-task-id="{{id}}">{{username}}</td>
+            <td class="task-user" data-user-id="{{id}}">{{username}}</td>
             {{/each}}
-            <td class="task-status" data-task-id="{{id}}">{{status.title}}</td>
+            <td class="task-status" data-status-id="{{status.id}}">{{status.title}}</td>
             <td>
                 <button type="button" class="btn btn-edit" data-task-id="{{id}}">Edit Task</button>
                 <button type="button" class="btn btn-delete" data-task-id="{{id}}">Delete Task</button>

@@ -1,10 +1,10 @@
 async function newTaskFormHandler(event) {
     event.preventDefault();
 
-    task_text = document.querySelector('#new-task').value.trim();
-    user_id = document.querySelector('[name="user-menu"]').value.split('-id')[1];
-    status_id = document.querySelector('[name="status-menu"]').value.split('-id')[1];
-    project_id = window.location.toString().split('/')[
+    const task_text = document.querySelector('#new-task').value.trim();
+    const user_id = document.querySelector('[name="user-menu"]').value.split('-id')[1];
+    const status_id = document.querySelector('[name="status-menu"]').value.split('-id')[1];
+    const project_id = window.location.toString().split('/')[
         window.location.toString().split('/').length-1];
 
     console.log(task_text, user_id, status_id);
@@ -27,33 +27,50 @@ async function newTaskFormHandler(event) {
     console.log(taskResponse);
     
     if (taskResponse.ok) {
-        document.location.reload();
-
-        // get new task id  --- need to figure this one out
-        const task_id = document.querySelector('').getAttribute('data-task-id');
-
-        // assign task to user
-        const userResponse = await fetch('/api/tasks/assign', {
-            method: 'PUT',
-            body: JSON.stringify({
-                task_id,
-                user_id
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-
-        if (userResponse.ok) {
-            document.location.reload();
-        }
-        
-        
+        getNewTaskId(user_id);
     }
     else {
         alert(taskResponse.statusText);
     }
 
+}
+
+function getNewTaskId(user) {
+    const user_id = user;
+    fetch('/api/tasks')
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                console.log(data);
+                const newTask = data.length -1;
+                const task_id = data[newTask].id;
+                console.log(task_id);
+                assignUser(task_id, user_id);
+            });
+}
+
+async function assignUser(task, user) {
+    const task_id = task;
+    const user_id = user;
+
+    const response = await fetch('/api/tasks/assign', {
+        method: 'PUT',
+        body: JSON.stringify({
+            task_id,
+            user_id
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+
+    if (response.ok) {
+        document.location.reload();
+    }
+    else {
+        alert(response.statusText);
+    }
 }
 
 function openTaskModal (event) {
