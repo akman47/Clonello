@@ -95,11 +95,6 @@ router.get('/edit/:id', withAuth, async (req, res) => {
   const project = dbTaskData.get({ plain: true });
   const status = dbStatusData.map(stat => stat.get({ plain: true }));
 
-  //push project task to show only one user
-  // project.user = {
-  //   username: project.tasks.users[0]
-  // }
-
   res.render('single-project', {
     project,
     users,
@@ -116,7 +111,7 @@ router.get('/edit/task/:id', withAuth, async (req, res) => {
     attributes: [
       'id',
       'task_text',
-      'status_id'
+      'status_id',
     ],
     include: [
       {

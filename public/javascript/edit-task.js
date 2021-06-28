@@ -3,7 +3,8 @@ async function editTaskFormHandler(event) {
 
     const task_id = window.location.toString().split('/')[
         window.location.toString().split('/').length-1];
-
+    
+    const project_id = document.querySelector('.edit-task-form').getAttribute("data-project-id")
     const task_text = document.querySelector('[name="edit-task-text"]').value.trim();
     const status_id = document.querySelector('[name="status-menu"]').value.split('-id')[1];
     const user_id = document.querySelector('[name="user-menu"]').value.split('-id')[1];
@@ -15,7 +16,8 @@ async function editTaskFormHandler(event) {
         method: 'PUT',
         body: JSON.stringify({
             task_text,
-            status_id
+            status_id,
+            user_id
         }),
         headers: {
             'Content-Type': 'application/json'
@@ -34,7 +36,7 @@ async function editTaskFormHandler(event) {
     })
 
     if (taskResponse.ok && userResponse.ok) {
-        document.location.replace(`/dashboard/edit/${task_id}`);
+        document.location.replace(`/dashboard/edit/${project_id}`);
         return;
     }
     else {

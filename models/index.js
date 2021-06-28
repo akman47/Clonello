@@ -2,15 +2,10 @@ const User = require('./User.js');
 const Project = require('./Project.js');
 const Task = require('./Task.js');
 const Status = require('./Status.js');
-const UserTask = require('./UserTask.js');
 const UserProject = require('./UserProject.js');
 
-User.belongsToMany(Task, {
-  through: UserTask
-});
-Task.belongsToMany(User, {
-  through: UserTask
-});
+User.hasMany(Task);
+Task.belongsTo(User);
 
 User.belongsToMany(Project, {
   through: UserProject
@@ -25,4 +20,4 @@ Task.belongsTo(Project);
 Status.hasMany(Task);
 Task.belongsTo(Status);
 
-module.exports = { User, Task, Project, Status, UserTask, UserProject };
+module.exports = { User, Task, Project, Status, UserProject };

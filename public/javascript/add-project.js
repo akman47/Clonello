@@ -26,16 +26,14 @@ async function addProjectHandler(event) {
 function getNewProjectId(user) {
   const user_id = user;
   fetch('/api/projects')
-          .then(response => {
-              return response.json()
-          })
-          .then(data => {
-              //console.log(data);
-              const newProject = data.length -1;
-              const project_id = data[newProject].id;
-              //console.log(project_id);
-              assignUser(project_id, user_id);
-          });
+  .then(response => {
+    return response.json()
+  })
+  .then(data => {
+    const newProject = data.length -1;
+    const project_id = data[newProject].id;
+    assignUser(project_id, user_id);
+  });
 }
 
 async function assignUser(project, user) {
@@ -43,14 +41,14 @@ async function assignUser(project, user) {
   const user_id = user;
 
   const response = await fetch('/api/projects/invite', {
-      method: 'PUT',
-      body: JSON.stringify({
-          project_id,
-          user_id
-      }),
-      headers: {
-          'Content-Type': 'application/json'
-      }
+    method: 'PUT',
+    body: JSON.stringify({
+      project_id,
+      user_id
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
   })
 
   if (response.ok) {

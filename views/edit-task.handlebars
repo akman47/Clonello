@@ -1,7 +1,7 @@
 <section>
     <div class="edit-task-container">
         <h2>Edit Task</h2>
-        <form class="edit-task-form">
+        <form class="edit-task-form" data-project-id="{{task.project.id}}">
             <div id="edit-task-text">
                 <input name="edit-task-text" id="edit-task-text" data-task-id="{{task.id}}" type="text" value="{{task.task_text}}" />
             </div>
