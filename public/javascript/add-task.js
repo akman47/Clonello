@@ -24,8 +24,10 @@ async function newTaskFormHandler(event) {
     console.log(taskResponse);
     
     if (taskResponse.ok) {
+        document.location.reload();
+
         // get new task id  --- need to figure this one out
-        const task_id = taskResponse.id;
+        const task_id = document.querySelector('').getAttribute('data-task-id');
 
         // assign task to user
         const userResponse = await fetch('/api/tasks/assign', {
@@ -38,8 +40,12 @@ async function newTaskFormHandler(event) {
                 'Content-Type': 'application/json'
             }
         })
-        document.location.reload();
-        return;
+
+        if (userResponse.ok) {
+            document.location.reload();
+        }
+        
+        
     }
     else {
         alert(taskResponse.statusText);
@@ -62,3 +68,7 @@ function closeTaskModal (event) {
 document.querySelector('#btn-add-task').addEventListener('click', newTaskFormHandler);
 document.querySelector('#open-task-modal').addEventListener('click', openTaskModal);
 document.querySelector('#close-task-modal').addEventListener('click', closeTaskModal);
+document.querySelectorAll('.btn-edit').forEach(btn => btn.addEventListener('click', function(event) {
+    const edit_task_id = event.target.getAttribute('data-task-id');
+        window.location.replace(`/dashboard/edit/task/${edit_task_id}`);
+}));

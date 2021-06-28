@@ -9,10 +9,10 @@
 </section>
 
 {{!-- {{log user}} --}}
-{{#if projects.length}}
+{{#if user.projects.length}}
 <section>
-  {{#each projects}}
-    <p><a href="/dashboard/projects/{{id}}">{{title}}</a></p>
+  {{#each user.projects}}
+    <p><a href="/dashboard/edit/{{id}}">{{title}}</a></p>
     <p>{{pluralize "task" tasks.length}}</p>
   {{/each}}
 </section>

@@ -1,0 +1,29 @@
+<section>
+    <div class="edit-task-container">
+        <h2>Edit Task</h2>
+        <form class="edit-task-form">
+            <div id="edit-task-text">
+                <input name="edit-task-text" id="edit-task-text" data-task-id="{{task.id}}" type="text" value="{{task.task_text}}" />
+            </div>
+            <div class="form-input user-menu">
+                    <select name="user-menu" id="task-user-menu">
+                        <option disabled selected value>Assign Task To: </option>
+                        {{#each project.users}}
+                        <option value="{{username}}-id{{id}}">{{username}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-input status-menu">
+                    <select name="status-menu" id="status-menu">
+                        <option disabled selected value>Select Task Status</option>
+                        {{#each status}}
+                        <option value="{{title}}-id{{id}}">{{title}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            <button type="button" class="btn btn-save-task">Save Task</button>
+        </form>
+    </div>
+</section>
+
+<script src="/javascript/edit-task.js"></script>
