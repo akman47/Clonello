@@ -3,7 +3,7 @@ async function deleteTask(event) {
 
     task_id = event.target.getAttribute('data-task-id');
 
-    console.log('click'+ task_id);
+    //console.log('click'+ task_id);
 
     const response = await fetch(`/api/tasks/${task_id}`, {
         method: 'DELETE'
