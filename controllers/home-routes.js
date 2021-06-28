@@ -1,5 +1,4 @@
 const router = require('express').Router();
-// const { User, Task, Project } = require('../models/');
 
 router.get('/', (req, res) => {
   if (req.session.loggedIn) {

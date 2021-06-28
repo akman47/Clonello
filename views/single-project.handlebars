@@ -23,7 +23,6 @@
 <section>
     <a class="back" href="/dashboard"> &larr; Back to Dashboard</a>
     <div class="project-header">
-        {{!-- {{log project}} --}}
         <h2>{{project.title}}</h2>
         <button type="button" class="btn btn-open-invite-modal">Invite Project Member</button>
     </div>
@@ -36,9 +35,7 @@
         {{#each project.tasks}}
         <tr>
             <td class="task-text-{{id}}" data-task-id="{{id}}">{{task_text}}</td>
-            {{#each users}}
-            <td class="task-user" data-user-id="{{id}}">{{username}}</td>
-            {{/each}}
+            <td class="task-user" data-user-id="{{user.id}}">{{user.username}}</td>
             <td class="task-status" data-status-id="{{status.id}}">{{status.title}}</td>
             <td>
                 <button type="button" class="btn btn-edit" data-task-id="{{id}}">Edit Task</button>

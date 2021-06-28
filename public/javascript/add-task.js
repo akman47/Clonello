@@ -7,8 +7,6 @@ async function newTaskFormHandler(event) {
     const project_id = window.location.toString().split('/')[
         window.location.toString().split('/').length-1];
 
-    //console.log(task_text, user_id, status_id);
-
     document.querySelector('.modal-add-task').style.display="none";
 
     // create task
@@ -35,16 +33,14 @@ async function newTaskFormHandler(event) {
 function getNewTaskId(user) {
     const user_id = user;
     fetch('/api/tasks')
-            .then(response => {
-                return response.json()
-            })
-            .then(data => {
-                //console.log(data);
-                const newTask = data.length -1;
-                const task_id = data[newTask].id;
-                //console.log(task_id);
-                assignUser(task_id, user_id);
-            });
+    .then(response => {
+        return response.json()
+    })
+    .then(data => {
+        const newTask = data.length -1;
+        const task_id = data[newTask].id;
+        assignUser(task_id, user_id);
+    });
 }
 
 async function assignUser(task, user) {
