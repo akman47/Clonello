@@ -4,6 +4,8 @@ async function newTaskFormHandler(event) {
     task_text = document.querySelector('#new-task').value.trim();
     user_id = document.querySelector('[name="user-menu"]').value.split('-id')[1];
     status_id = document.querySelector('[name="status-menu"]').value.split('-id')[1];
+    project_id = window.location.toString().split('/')[
+        window.location.toString().split('/').length-1];
 
     console.log(task_text, user_id, status_id);
 
@@ -14,7 +16,8 @@ async function newTaskFormHandler(event) {
         method: 'POST',
         body: JSON.stringify({
             task_text,
-            status_id
+            status_id,
+            project_id
         }),
         headers: {
             'Content-Type': 'application/json'
