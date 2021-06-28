@@ -9,18 +9,31 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    color: var(--white);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 a {
     text-decoration: none;
+    color: var(--white);
 }
 
 a:hover {
     font-style: italic;
 }
 
+input {
+    color: black;
+}
+
 body {
-    background-color: var(--lightgreen);
+    background-image: url('../images/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+select, option {
+    color: black;
 }
 
 header {
@@ -41,10 +54,6 @@ header h1 {
     font-size: 32px;
     text-align: center;
     padding-left: 20px;
-}
-
-header a {
-    color: var(--white);
 }
 
 header a:visited {
@@ -74,7 +83,6 @@ header nav ul li {
 .account-header h2 {
     margin-top: 35px;
 }
-
 
 /* log in and sign up style */
 .account {
@@ -110,6 +118,11 @@ header nav ul li {
     border-radius: 5px;
 }
 
+.btn-no-style {
+    outline: none;
+    background: transparent;
+}
+
 .form-input {
     margin: 6px;
 }
@@ -140,6 +153,6 @@ table {
 }
 
 table, th, td {
-    border: 1px solid black;
+    border: 1px solid white;
     text-align: center;
 }

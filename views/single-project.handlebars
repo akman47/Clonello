@@ -19,14 +19,11 @@
     </div>
 </section>
 
-
 {{!-- main single-project view --}}
 <section>
     <a class="back" href="/dashboard"> &larr; Back to Dashboard</a>
     <div class="project-header">
-        {{!-- {{log project}} --}}
-        {{!-- {{log project.task[0].status}} --}}
-        <h2>{{projects.title}}</h2>
+        <h2>{{project.title}}</h2>
         <button type="button" class="btn btn-open-invite-modal">Invite Project Member</button>
     </div>
     <table id='project-task'>
@@ -35,13 +32,11 @@
             <th class="table-header">Assigned</th>
             <th class="table-header">Status</th>
         </tr>
-        {{#each projects.tasks}}
+        {{#each project.tasks}}
         <tr>
-            <td>{{task_text}}</td>
-            {{#each users}}
-            <td>{{username}}</td>
-            {{/each}}
-            <td>{{status.title}}</td>
+            <td class="task-text-{{id}}" data-task-id="{{id}}">{{task_text}}</td>
+            <td class="task-user" data-user-id="{{user.id}}">{{user.username}}</td>
+            <td class="task-status" data-status-id="{{status.id}}">{{status.title}}</td>
             <td>
                 <button type="button" class="btn btn-edit" data-task-id="{{id}}">Edit Task</button>
                 <button type="button" class="btn btn-delete" data-task-id="{{id}}">Delete Task</button>
@@ -86,4 +81,3 @@
 <script src="/javascript/invite-user.js"></script>
 <script src="/javascript/add-task.js"></script>
 <script src="/javascript/delete-task.js"></script>
-<script src="/javascript/edit-task.js"></script>

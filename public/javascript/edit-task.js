@@ -1,31 +1,47 @@
 async function editTaskFormHandler(event) {
     event.preventDefault();
 
-    task_id = event.target.getAttribute('data-task-id');
-    // fill in element ids
-    task_text = document.querySelector('').value;
-    status_id = document.querySelector('[name="status-menu"]').value.split('-id')[1];
+    const task_id = window.location.toString().split('/')[
+        window.location.toString().split('/').length-1];
+    
+    const project_id = document.querySelector('.edit-task-form').getAttribute("data-project-id")
+    const task_text = document.querySelector('[name="edit-task-text"]').value.trim();
+    const status_id = document.querySelector('[name="status-menu"]').value.split('-id')[1];
+    const user_id = document.querySelector('[name="user-menu"]').value.split('-id')[1];
 
     console.log('click'+task_id);
+    console.log(task_text, status_id, user_id);
 
-    const response = await fetch(`/api/tasks/${task_id}`, {
+    const taskResponse = await fetch(`/api/tasks/${task_id}`, {
         method: 'PUT',
         body: JSON.stringify({
             task_text,
-            status_id
+            status_id,
+            user_id
         }),
         headers: {
             'Content-Type': 'application/json'
         }
     });
 
-    if (response.ok) {
-        document.location.replace('/single-project');
+    const userResponse = await fetch('/api/tasks/assign', {
+        method: 'PUT',
+        body: JSON.stringify({
+            task_id,
+            user_id
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+
+    if (taskResponse.ok && userResponse.ok) {
+        document.location.replace(`/dashboard/edit/${project_id}`);
         return;
     }
     else {
-        alert(response.statusText);
+        alert(taskResponse.statusText, userResponse.statusText);
     }
 }
 
-document.querySelectorAll('.btn-edit').forEach(btn => btn.addEventListener('click', editTaskFormHandler));
+document.querySelector('.btn-save-task').addEventListener('click', editTaskFormHandler);

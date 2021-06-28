@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Task, Project, Status, UserTask } = require('../../models');
+const { User, Task, Project, Status } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 
@@ -74,7 +74,7 @@ router.post('/', (req, res) => {
       task_text: req.body.task_text,
       project_id: req.body.project_id,
       status_id: req.body.status_id,
-      user_id: req.session.user_id
+      user_id: req.body.user_id
     })
     .then(dbTaskData => res.json(dbTaskData))
     .catch(err => {
@@ -84,23 +84,12 @@ router.post('/', (req, res) => {
   }
 });
 
-router.put('/assign', (req, res) => {
-  UserTask.create({
-    user_id: req.body.user_id,
-    task_id: req.body.task_id
-  })
-  .then(dbProjectData => res.json(dbProjectData))
-  .catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
-});
-
 router.put('/:id', withAuth, (req, res) => {
   Task.update(
     {
       task_text: req.body.task_text,
-      status_id: req.body.status_id
+      status_id: req.body.status_id,
+      user_id: req.body.user_id
     },
     {
       where: {
