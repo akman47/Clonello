@@ -2,48 +2,6 @@ const router = require('express').Router();
 const { User, Task, Project, Status } = require('../models/');
 const withAuth = require('../utils/auth.js');
 
-router.get('/', (req, res) => {
-  Project.findAll({
-    include: [User, Task]
-  })
-  .then(dbProjectData => {
-    const projects = dbProjectData.map(project => project.get({ plain: true }));
-    res.render('dashboard', {
-      projects,
-      loggedIn: true
-    });
-  })
-  .catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
-});
-
-router.get('/projects/:id', (req, res) => {
-  Project.findOne({
-    where: {
-      id: req.params.id
-    },
-    include: [User, Task]
-  })
-  .then(dbProjectData => {
-    if (!dbProjectData) {
-      res.status(404).json({ message: 'No project found with this id' });
-      return;
-    }
-    
-    const projects = dbProjectData.get({ plain: true });
-    res.render('single-project', {
-      projects,
-      loggedIn: true
-    });
-  })
-  .catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
-});
-
 router.get('/', withAuth, (req, res) => {
   console.log(req.session);
   User.findOne(
@@ -79,6 +37,7 @@ router.get('/', withAuth, (req, res) => {
 });
 
 router.get('/edit/:id', withAuth, async (req, res) => {
+  
   const dbUserData = await User.findAll(
     {
       attributes: ['id', 'username']

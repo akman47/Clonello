@@ -24,9 +24,9 @@
 <section>
     <a class="back" href="/dashboard"> &larr; Back to Dashboard</a>
     <div class="project-header">
-        {{!-- {{log project}} --}}
+        {{log project}}
         {{!-- {{log project.task[0].status}} --}}
-        <h2>{{projects.title}}</h2>
+        <h2>{{project.title}}</h2>
         <button type="button" class="btn btn-open-invite-modal">Invite Project Member</button>
     </div>
     <table id='project-task'>
@@ -35,7 +35,7 @@
             <th class="table-header">Assigned</th>
             <th class="table-header">Status</th>
         </tr>
-        {{#each projects.tasks}}
+        {{#each project.tasks}}
         <tr>
             <td>{{task_text}}</td>
             {{#each users}}

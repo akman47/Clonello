@@ -1,21 +1,6 @@
-<section>
-  <h2>Create New Project</h2>
-  <form class="new-project-form">
-    <div>
-      <input type="text" id="project-title" name="project-title" placeholder="Title" />
-    </div>
-    <button type="submit" id="create-project-btn" class="btn">Create</button>
-  </form>
-</section>
-
-{{!-- {{log user}} --}}
-{{#if projects.length}}
-<section>
-  {{#each projects}}
-    <p><a href="/dashboard/projects/{{id}}">{{title}}</a></p>
-    <p>{{pluralize "task" tasks.length}}</p>
-  {{/each}}
-</section>
-{{/if}}
-
-<script src="/javascript/add-project.js"></script>
+<p>Hello World</p>
+{{log user}}
+{{#each user.projects}}
+<li>{{title}}</li>
+<p>{{tasks.length}}</p>
+{{/each}}
