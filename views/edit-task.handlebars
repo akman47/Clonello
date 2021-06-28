@@ -8,7 +8,8 @@
             <div class="form-input user-menu">
                     <select name="user-menu" id="task-user-menu">
                         <option disabled selected value>Assign Task To: </option>
-                        {{#each project.users}}
+                        {{log task.project}}
+                        {{#each task.project.users}}
                         <option value="{{username}}-id{{id}}">{{username}}</option>
                         {{/each}}
                     </select>

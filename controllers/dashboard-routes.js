@@ -168,6 +168,16 @@ router.get('/edit/task/:id', withAuth, async (req, res) => {
       {
         model: Status,
         attributes: ['id', 'title']
+      },
+      {
+        model: Project,
+        attributes: ['id'],
+        include: [
+          {
+            model: User,
+            attributes: ['id', 'username']
+          }
+        ]
       }
     ]
   });
@@ -177,33 +187,6 @@ router.get('/edit/task/:id', withAuth, async (req, res) => {
       attributes: ['id', 'title']
     }
   );
-
-  const dbProjectData = await Project.findOne(
-    {
-      where: {
-        id: req.params.id
-    },
-    include: [
-      {
-        model: User,
-        attributes: ['id', 'username']
-      },
-      {
-        model: Task,
-        attributes: ['id', 'task_text', 'status_id'],
-        include: [
-          {
-            model: Status,
-            attributes: ['id', 'title']
-          },
-          {
-            model: User,
-            attributes: ['id', 'username']
-          }
-        ]
-      }
-    ]
-  })
 
   if (!dbStatusData) {
     res.status(500).json(err);
@@ -216,12 +199,10 @@ router.get('/edit/task/:id', withAuth, async (req, res) => {
   }
 
   const task = dbTaskData.get({ plain: true });
-  //const project = dbProjectData.get({ plain: true });
   const status = dbStatusData.map(stat => stat.get({ plain: true }));
 
   res.render('edit-task', {
     task,
-    //project,
     status,
     loggedIn: true
   });
