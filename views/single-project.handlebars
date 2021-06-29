@@ -28,6 +28,7 @@
             <button type="button" class="btn btn-open-invite-modal">Invite Project Member</button>
             <button type="button" class="btn" id="open-task-modal">Add Task</button>
             <button type="button" class="btn" id="open-status-modal">Create New Status</button>
+            <button type="button" class="btn" id="open-delete-modal">Delete Status</button>
             <button type="button" class="btn" id="delete-project-btn">Delete Project</button>
         </div>
     </div>
@@ -96,8 +97,28 @@
     </div>
 </section>
 
+{{!-- delete status modal --}}
+<section class="modal-delete-status">
+    <div class="delete-status">
+        <h2>Delete Task Status</h2>
+        <form class="delete">
+            <select name="delete-status-menu" id="status-menu">
+                <option disabled selected value>Select Task Status</option>
+                    {{#each status}}
+                    <option value="{{title}}-id{{id}}">{{title}}</option>
+                    {{/each}}
+            </select>
+            <div class="btn-container">
+                <button type="click" id="btn-delete-status" class="btn">Delete</button>
+                <button type="button" class="btn" id="close-delete-modal">Close</button>
+            </div>
+        </form>
+    </div>
+</section>
+
 <script src="/javascript/invite-user.js"></script>
 <script src="/javascript/add-task.js"></script>
 <script src="/javascript/delete-task.js"></script>
 <script src="/javascript/delete-project.js"></script>
 <script src="/javascript/add-status.js"></script>
+<script src="/javascript/delete-status.js"></script>

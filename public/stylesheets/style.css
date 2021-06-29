@@ -128,7 +128,7 @@ header nav ul li {
 }
 
 /* single-project view */
-.modal-invite-user, .modal-add-task, .modal-add-status {
+.modal-invite-user, .modal-add-task, .modal-add-status, .modal-delete-status {
     display: none;
     position: fixed;
     z-index: 1;
@@ -140,7 +140,7 @@ header nav ul li {
     color: var(--white);
 }
 
-.modal-add-task, .modal-add-status {
+.modal-add-task, .modal-add-status, .modal-delete-status {
     width: 50%;
     height: 30%;
 }
