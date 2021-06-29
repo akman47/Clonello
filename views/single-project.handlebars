@@ -24,8 +24,12 @@
     <a class="back" href="/dashboard"> &larr; Back to Dashboard</a>
     <div class="project-header">
         <h2>{{project.title}}</h2>
-        <button type="button" class="btn btn-open-invite-modal">Invite Project Member</button>
-        <button type="button" class="btn" id="delete-project-btn">Delete Project</button>
+        <div class="dash-btn-container">
+            <button type="button" class="btn btn-open-invite-modal">Invite Project Member</button>
+            <button type="button" class="btn" id="open-task-modal">Add Task</button>
+            <button type="button" class="btn" id="open-status-modal">Create New Status</button>
+            <button type="button" class="btn" id="delete-project-btn">Delete Project</button>
+        </div>
     </div>
     <table id='project-task'>
         <tr>
@@ -45,13 +49,12 @@
         </tr>
         {{/each}}
     </table>
-    <button type="button" class="btn" id="open-task-modal">Add Task</button>
 </section>
 
 {{!-- add task modal --}}
 <section class="modal-add-task">
         <div class="add-task">
-            <h2>Add New Project Task</h2>
+            <h2>Add Project Task</h2>
             <form class="new-task-form" data-project-id="{{project.id}}">
                 <div class="form-input">
                     <input type="text" id="new-task" name="new-task" placeholder="Task" />
@@ -79,7 +82,22 @@
     </div>
 </section>
 
+{{!-- add status modal --}}
+<section class="modal-add-status">
+    <div class="add-status">
+        <h2>Add Task Status</h2>
+        <form class="new-status">
+            <div>
+                <input type="text" id="new-status-text" name="new-status-text" placeholder="To Do" />
+            </div>
+            <button type="click" id="btn-add-status" class="btn">Add Status</button>
+            <button type="button" class="btn" id="close-status-modal">Close</button>
+        </form>
+    </div>
+</section>
+
 <script src="/javascript/invite-user.js"></script>
 <script src="/javascript/add-task.js"></script>
 <script src="/javascript/delete-task.js"></script>
 <script src="/javascript/delete-project.js"></script>
+<script src="/javascript/add-status.js"></script>

@@ -128,19 +128,24 @@ header nav ul li {
 }
 
 /* single-project view */
-.modal-invite-user, .modal-add-task {
+.modal-invite-user, .modal-add-task, .modal-add-status {
     display: none;
     position: fixed;
     z-index: 1;
-    width: 30%;
-    height: 40%;
+    width: 70%;
+    height: 50%;
     overflow: auto;
     align-items: center;
     background-color: rgba(37, 71, 71, 0.8);
     color: var(--white);
 }
 
-.add-task {
+.modal-add-task, .modal-add-status {
+    width: 50%;
+    height: 30%;
+}
+
+.add-task, .add-status, .invite-user {
     display: flex;
     flex-direction: column;
     align-items: center;
