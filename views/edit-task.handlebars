@@ -1,9 +1,9 @@
 <section>
-    <a class="back" href="/dashboard"> &larr; Back to Dashboard</a>
+    <a class="back" id="edit-back" href="/dashboard"> &larr; Back to Dashboard</a>
     <div class="edit-task-container">
-        <h2>Edit Task</h2>
+        <h2 class="edit-header">Edit Task</h2>
         <form class="edit-task-form" data-project-id="{{task.project.id}}">
-            <div id="edit-task-text">
+            <div id="edit-task">
                 <input name="edit-task-text" id="edit-task-text" data-task-id="{{task.id}}" type="text" value="{{task.task_text}}" />
             </div>
             <div class="form-input user-menu">
