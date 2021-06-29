@@ -1,6 +1,5 @@
 {{!-- invite user modal --}}
-<section class="modal-invite-user">
-    <div class="modal-content">
+<section class="modal modal-invite-user">
         <div class="invite-user">
             <h2>Invite New Project Member</h2>
             <form class="add-user-form" data-project-id="{{project.id}}">
@@ -16,6 +15,69 @@
                 <button type="button" class="btn btn-close-invite-modal">Close</button>
             </form>
         </div>
+</section>
+
+{{!-- add task modal --}}
+<section class="modal modal-add-task">
+        <div class="add-task">
+            <h2>Add Project Task</h2>
+            <form class="new-task-form" data-project-id="{{project.id}}">
+                <div class="form-input">
+                    <input type="text" id="new-task" name="new-task" placeholder="Task" />
+                </div>
+                <div class="form-input user-menu">
+                    <select name="user-menu" id="task-user-menu">
+                        <option disabled selected value>Assign Task To: </option>
+                        {{#each project.users}}
+                        <option value="{{username}}-id{{id}}">{{username}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-input status-menu">
+                    <select name="status-menu" id="status-menu">
+                        <option disabled selected value>Select Task Status</option>
+                        {{#each status}}
+                        <option value="{{title}}-id{{id}}">{{title}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <button type="submit" class="btn" id="btn-add-task">Add Task</button>
+                <button type="button" class="btn" id="close-task-modal">Close</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+{{!-- add status modal --}}
+<section class="modal modal-add-status">
+    <div class="add-status">
+        <h2>Add Task Status</h2>
+        <form class="new-status">
+            <div>
+                <input type="text" id="new-status-text" name="new-status-text" placeholder="To Do" />
+            </div>
+            <button type="click" id="btn-add-status" class="btn">Add Status</button>
+            <button type="button" class="btn" id="close-status-modal">Close</button>
+        </form>
+    </div>
+</section>
+
+{{!-- delete status modal --}}
+<section class="modal modal-delete-status">
+    <div class="delete-status">
+        <h2>Delete Task Status</h2>
+        <form class="delete">
+            <select name="delete-status-menu" id="status-menu">
+                <option disabled selected value>Select Task Status</option>
+                    {{#each status}}
+                    <option value="{{title}}-id{{id}}">{{title}}</option>
+                    {{/each}}
+            </select>
+            <div class="btn-container">
+                <button type="click" id="btn-delete-status" class="btn">Delete</button>
+                <button type="button" class="btn" id="close-delete-modal">Close</button>
+            </div>
+        </form>
     </div>
 </section>
 
@@ -50,70 +112,6 @@
         </tr>
         {{/each}}
     </table>
-</section>
-
-{{!-- add task modal --}}
-<section class="modal-add-task">
-        <div class="add-task">
-            <h2>Add Project Task</h2>
-            <form class="new-task-form" data-project-id="{{project.id}}">
-                <div class="form-input">
-                    <input type="text" id="new-task" name="new-task" placeholder="Task" />
-                </div>
-                <div class="form-input user-menu">
-                    <select name="user-menu" id="task-user-menu">
-                        <option disabled selected value>Assign Task To: </option>
-                        {{#each project.users}}
-                        <option value="{{username}}-id{{id}}">{{username}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-                <div class="form-input status-menu">
-                    <select name="status-menu" id="status-menu">
-                        <option disabled selected value>Select Task Status</option>
-                        {{#each status}}
-                        <option value="{{title}}-id{{id}}">{{title}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-                <button type="submit" class="btn" id="btn-add-task">Add Task</button>
-                <button type="button" class="btn" id="close-task-modal">Close</button>
-            </form>
-        </div>
-    </div>
-</section>
-
-{{!-- add status modal --}}
-<section class="modal-add-status">
-    <div class="add-status">
-        <h2>Add Task Status</h2>
-        <form class="new-status">
-            <div>
-                <input type="text" id="new-status-text" name="new-status-text" placeholder="To Do" />
-            </div>
-            <button type="click" id="btn-add-status" class="btn">Add Status</button>
-            <button type="button" class="btn" id="close-status-modal">Close</button>
-        </form>
-    </div>
-</section>
-
-{{!-- delete status modal --}}
-<section class="modal-delete-status">
-    <div class="delete-status">
-        <h2>Delete Task Status</h2>
-        <form class="delete">
-            <select name="delete-status-menu" id="status-menu">
-                <option disabled selected value>Select Task Status</option>
-                    {{#each status}}
-                    <option value="{{title}}-id{{id}}">{{title}}</option>
-                    {{/each}}
-            </select>
-            <div class="btn-container">
-                <button type="click" id="btn-delete-status" class="btn">Delete</button>
-                <button type="button" class="btn" id="close-delete-modal">Close</button>
-            </div>
-        </form>
-    </div>
 </section>
 
 <script src="/javascript/invite-user.js"></script>
