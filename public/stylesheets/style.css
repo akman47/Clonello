@@ -216,6 +216,10 @@ ul {
     margin: 10px;
 }
 
+.modal-add-task {
+    height: 50%;
+}
+
 .project-title-display {
     font-size: 80px;
     /* text-align: center; */
