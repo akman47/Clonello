@@ -1,7 +1,6 @@
 :root {
     --white: #f5f5f5;
     --blue: #1e6dff;
-    --lightgreen: #83cfac;
     --lilac: mediumslateblue;
 }
 
@@ -18,7 +17,7 @@ a {
     color: var(--white);
 }
 
-a:hover {
+a:hover, #logout:hover {
     font-style: italic;
 }
 
@@ -28,8 +27,7 @@ input {
 
 body {
     background-image: url('../images/background.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-position-x: center;
 }
 
 select, option {
@@ -37,7 +35,6 @@ select, option {
 }
 
 header {
-    padding: 20px 15px;
     background-color: var(--lilac);
     color: var(--white);
     display: flex;
@@ -84,7 +81,30 @@ header nav ul li {
     margin-top: 35px;
 }
 
-/* log in and sign up style */
+/* utils */
+.btn {
+    background-color: var(--blue);
+    color: var(--white);
+    font-weight: bold;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.btn-no-style {
+    outline: none;
+    background: transparent;
+}
+
+.form-input {
+    margin: 6px;
+}
+
+.back {
+    margin: 30px;
+}
+
+/* log in and sign up */
 .account {
     text-align: center;
     padding: 30px 50px;
@@ -107,24 +127,38 @@ header nav ul li {
     font-weight: bold;
 }
 
-
-/* utils */
-.btn {
-    background-color: var(--blue);
-    color: var(--white);
-    font-weight: bold;
-    padding: 5px;
-    margin: 10px;
-    border-radius: 5px;
+/* dashboard */
+.create-project {
+    text-align: center;
+    margin-top: 100px;
 }
 
-.btn-no-style {
-    outline: none;
-    background: transparent;
+#project-title {
+    width: 260px;
 }
 
-.form-input {
-    margin: 6px;
+#create-project-btn {
+    width: 260px;
+}
+
+.project-display {
+    text-align: center;
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.access-project-btn {
+    width: 20vw;
+    background: none;
+    border: 1px solid var(--white);
+    overflow-wrap: break-word;
+}
+
+ul {
+    list-style: none;
 }
 
 /* single-project view */
@@ -136,7 +170,7 @@ header nav ul li {
     height: 40%;
     overflow: auto;
     align-items: center;
-    background-color: rgba(37, 71, 71, 0.8);
+    background-color: rgba(30, 109, 255, 0.8);
     color: var(--white);
     top: 30%;
     left: 25%;
@@ -157,11 +191,44 @@ header nav ul li {
     margin: 15px;
 }
 
-table {
-    width: 90%;
+.card {
+    background: linear-gradient(var(--blue), var(--lilac));
+    transition: 0.3s;
+    border-radius: 5px;
+    width: 400px;
+    height: 300px;
+    padding: 30px;
+    margin: 30px;
+    word-wrap: break-word;
 }
 
-table, th, td {
-    border: 1px solid white;
+.task-display {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#task-title {
     text-align: center;
+    font-size: 30px;
+}
+
+.task-btns {
+    text-align: center;
+}
+
+/* edit task */
+
+.edit-task-container {
+    text-align: center;
+    margin: 100px;
+}
+
+.edit-header {
+    margin-bottom: 20px;
+}
+
+#edit-task-text, #task-user-menu, #status-menu {
+    width: 30vw;
+    margin-bottom: 15px;
 }

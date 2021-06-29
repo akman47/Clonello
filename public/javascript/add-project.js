@@ -1,3 +1,6 @@
+const uses = document.querySelector('.project-list').getAttribute('value');
+console.log(uses)
+
 async function addProjectHandler(event) {
   event.preventDefault();
 
