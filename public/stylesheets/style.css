@@ -153,6 +153,13 @@ header nav ul li {
     margin: 10px;
 }
 
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px;
+}
+
 table {
     width: 90%;
 }
