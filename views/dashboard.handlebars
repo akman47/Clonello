@@ -10,10 +10,11 @@
 
 {{#if user.projects.length}}
 <section>
+  <ul class="project-list">
   {{#each user.projects}}
-    <p><a href="/dashboard/edit/{{id}}">{{title}}</a></p>
-    <p>{{pluralize "task" tasks.length}}</p>
+    <li><a href="/dashboard/edit/{{id}}">{{title}}</a> ({{pluralize "task" tasks.length}})</li>
   {{/each}}
+  </ul>
 </section>
 {{/if}}
 
