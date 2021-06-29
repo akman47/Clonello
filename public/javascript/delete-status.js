@@ -11,6 +11,7 @@ async function deleteStatus(event) {
 
     if (response.ok) {
         document.location.reload();
+        alert('Status Deleted');
     }
     else {
         alert(response.statusText);

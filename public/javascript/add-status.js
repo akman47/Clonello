@@ -17,9 +17,11 @@ async function addStatusFormHandler(event) {
 
     if (response.ok) {
         document.location.reload();
+        alert('Status Added');
     }
     else {
-        alert(response.statusText);
+        console.log(response.statusText);
+        alert('Status already exists');
     }
 }
 
