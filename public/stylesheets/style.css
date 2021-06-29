@@ -1,3 +1,4 @@
+
 :root {
     --white: #f5f5f5;
     --blue: #1e6dff;
@@ -94,6 +95,8 @@ header nav ul li {
 .btn-no-style {
     outline: none;
     background: transparent;
+    margin-top: 20px;
+    font-size: 20px;
 }
 
 .form-input {
@@ -122,12 +125,38 @@ header nav ul li {
     margin: 5px;
 }
 
-#signup-btn, #login-btn {
+#signup, #login {
     margin-top: 10px;
     font-weight: bold;
+    width: 150px;
+}
+
+#description {
+    padding: 100px;
+    font-size: 40px;
+    font-family: garamond;
+}
+
+#signup-header {
+    margin: 80px;
+    font-size: 50px;
+}
+
+.signup-direct {
+    font-size: 20px;
+}
+
+#email-login, #password-login, #email-signup, #username-signup, #password-signup {
+    width: 300px;
+    height: 30px;
+    margin-bottom: 10px;
 }
 
 /* dashboard */
+#project-form-header {
+    margin: 50px;
+}
+
 .create-project {
     text-align: center;
     margin-top: 100px;
@@ -135,6 +164,8 @@ header nav ul li {
 
 #project-title {
     width: 260px;
+    height: 30px;
+    margin-bottom: 10px;
 }
 
 #create-project-btn {
@@ -155,6 +186,7 @@ header nav ul li {
     background: none;
     border: 1px solid var(--white);
     overflow-wrap: break-word;
+    font-size: 25px;
 }
 
 ul {
@@ -184,19 +216,50 @@ ul {
     margin: 10px;
 }
 
-.project-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 15px;
+.project-title-display {
+    font-size: 80px;
+    /* text-align: center; */
+    margin: 50px;
+    font-family: garamond;
 }
 
+/* .member-list {
+    margin: 30px;
+} */
+
+.add-task-btn {
+    width: 300px;
+    font-size: 20px;
+}
+
+#invite-btn, #delete-project-btn, #open-status-modal, #open-delete-modal {
+    width: 200px;
+}
+
+.add-task-div {
+    text-align: center;
+}
+
+.project-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    margin: 30px;
+}
+
+.header-el {
+    display: block;
+}
+
+/* cards */
+
 .card {
-    background: linear-gradient(var(--blue), var(--lilac));
+    background: var(--lilac);
     transition: 0.3s;
     border-radius: 5px;
     width: 400px;
-    height: 300px;
     padding: 30px;
     margin: 30px;
     word-wrap: break-word;
@@ -211,6 +274,10 @@ ul {
 #task-title {
     text-align: center;
     font-size: 30px;
+}
+
+#task-title, .task-user, .task-status {
+    margin-bottom: 20px;
 }
 
 .task-btns {
