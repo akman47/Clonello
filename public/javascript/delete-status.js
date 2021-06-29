@@ -22,6 +22,8 @@ function openDeleteModal (event) {
     event.preventDefault();
 
     document.querySelector('.modal-delete-status').style.display="block";
+    document.querySelector('.modal-add-status').style.display="none";
+    document.querySelector('.modal-add-task').style.display="none";
 };
 
 function closeDeleteModal (event) {

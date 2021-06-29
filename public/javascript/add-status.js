@@ -29,6 +29,9 @@ function openStatusModal (event) {
     event.preventDefault();
 
     document.querySelector('.modal-add-status').style.display="block";
+    document.querySelector('.modal-delete-status').style.display="none";
+    document.querySelector('.modal-add-task').style.display="none";
+    document.querySelector('.modal-invite-user').style.display="none";
 };
 
 function closeStatusModal (event) {
