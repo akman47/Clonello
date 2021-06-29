@@ -24,23 +24,12 @@ async function editTaskFormHandler(event) {
         }
     });
 
-    const userResponse = await fetch('/api/tasks/assign', {
-        method: 'PUT',
-        body: JSON.stringify({
-            task_id,
-            user_id
-        }),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-
-    if (taskResponse.ok && userResponse.ok) {
+    if (taskResponse.ok) {
         document.location.replace(`/dashboard/edit/${project_id}`);
         return;
     }
     else {
-        alert(taskResponse.statusText, userResponse.statusText);
+        alert(taskResponse.statusText);
     }
 }
 
