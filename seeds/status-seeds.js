@@ -2,16 +2,17 @@ const { Status } = require('../models');
 
 const statusData = [
   {
+    id: 1,
     title: 'To Do'
   },
   {
+    id: 2,
     title: 'In Progress'
   },
   {
+    id: 3,
     title: 'Complete'
   }
 ]
 
-const seedStatus = () => Status.bulkCreate(statusData);
-
-seedStatus();
+Status.bulkCreate(statusData);

@@ -3,14 +3,18 @@ const express = require('express');
 const routes = require('./controllers/');
 const sequelize = require('./config/connection.js');
 const helpers = require('./utils/helpers');
+const seeder = require('./seeds/status-seeds');
 const exphbs = require('express-handlebars');
-const hbs = exphbs.create({ helpers });
+const hbs = exphbs.create({ helpers, seeder });
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const sess = {
   secret: 'I will never tell!',
-  cookie: {},
+  rolling: true,
+  cookie: {
+    expires: 5*60*1000
+  },
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
