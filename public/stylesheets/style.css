@@ -91,7 +91,7 @@ header nav ul li {
 }
 
 .account h2 {
-    margin-bottom: 5px;
+    margin-bottom: 7px;
 }
 
 .login-form, .signup-form {
@@ -124,7 +124,7 @@ header nav ul li {
 }
 
 .form-input {
-    margin: 6px;
+    margin: 7px;
 }
 
 /* single-project view */
