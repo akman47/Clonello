@@ -15,7 +15,8 @@ async function newTaskFormHandler(event) {
         body: JSON.stringify({
             task_text,
             status_id,
-            project_id
+            project_id,
+            user_id
         }),
         headers: {
             'Content-Type': 'application/json'
@@ -47,7 +48,7 @@ async function assignUser(task, user) {
     const task_id = task;
     const user_id = user;
 
-    const response = await fetch('/api/tasks/assign', {
+    const response = await fetch(`/api/tasks/${task_id}`, {
         method: 'PUT',
         body: JSON.stringify({
             task_id,
