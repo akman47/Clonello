@@ -21,7 +21,7 @@ async function addStatusFormHandler(event) {
     }
     else {
         console.log(response.statusText);
-        alert('Status already exists');
+        alert('Please enter a new status');
     }
 }
 
