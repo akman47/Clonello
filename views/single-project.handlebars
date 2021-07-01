@@ -15,9 +15,9 @@
                 <button type="submit" class="btn btn-invite-user btn-go modal-btn">Add User</button><br>
                 <div id="edit-project">
                     <input name="edit-project-title" id="edit-project-title" data-project-id="{{project.id}}" type="text" value="{{project.title}}" />
-                    <button type="button" class="btn btn-go modal-btn" id="save-project">Save</button><br>
                 </div>
                 <div class="btn-container">
+                    <button type="button" class="btn btn-go modal-btn" id="save-project">Save</button><br><br>
                     <button type="button" class="btn btn-danger modal-btn" id="delete-project-btn">Delete Project</button><br>
                     <button type="button" class="btn btn-close-invite-modal modal-btn">Close</button>
                 </div>
@@ -94,9 +94,14 @@
 </section>
 
 {{!-- main single-project view --}}
-<div>
-    <a class="back" href="/dashboard"> &larr; Back to Dashboard</a>
-    <div class="project-header">
+<div class="project-view">
+    <div class="left-container">
+        <a class="back" href="/dashboard"> &larr; Back to Dashboard</a>
+        <div class="header-btn-container">
+            <button type="button" class="btn add-task-btn" id="open-task-modal">Add Task</button><br>
+            <button type="button" class="btn" id="open-status-modal">Edit Status</button><br>
+            <button type="button" class="btn btn-open-invite-modal" id="invite-btn">Edit Project</button><br>
+        </div>
         <div class="header-el">
             <ul class="member-list">
                 <h2>Members:</h2>
@@ -105,15 +110,14 @@
                 {{/each}}
             </ul>
         </div>
+    </div>
+
+    <div class="right-container">
         <div class="header-el">
             <h2 class="project-title-display">{{project.title}}</h2>
         </div>
-        <div class="header-el">
-            <button type="button" class="btn add-task-btn" id="open-task-modal">Add Task</button><br>
-            <button type="button" class="btn" id="open-status-modal">Edit Status</button><br>
-            <button type="button" class="btn btn-open-invite-modal" id="invite-btn">Edit Project</button><br>
-        </div>
-    </div>
+            
+    
     {{!-- <div class="add-task-div">
         <button type="button" class="btn add-task-btn" id="open-task-modal">Add Task</button>
         <button type="button" class="btn" id="open-status-modal">Add Status</button><br>
@@ -130,6 +134,7 @@
             </div>
         </div>
         {{/each}}
+    </div>
     </div>
 </section>
 

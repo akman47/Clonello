@@ -91,6 +91,10 @@ header nav ul li {
     border-radius: 5px;
 }
 
+.btn:hover {
+    cursor: pointer;
+}
+
 .btn-no-style {
     outline: none;
     background: transparent;
@@ -206,7 +210,7 @@ ul {
     position: fixed;
     z-index: 1;
     width: 45%;
-    height: 55%;
+    height: 60%;
     overflow: auto;
     align-items: center;
     background-color: rgba(30, 109, 255, 0.8);
@@ -221,10 +225,6 @@ ul {
     align-items: center;
     padding: 5px;
     margin: 10px;
-}
-
-.modal-add-task {
-    height: 50%;
 }
 
 .btn-container {
@@ -246,7 +246,7 @@ ul {
 }
 
 #open-task-modal, #open-status-modal, #invite-btn {
-    width: 300px;
+    width: 200px;
     font-size: 20px;
 }
 
@@ -264,7 +264,33 @@ ul {
 }
 
 .header-el {
-    display: block;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-view {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-container {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.right-container {
+    width: 75%;
+}
+
+.header-btn-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 35px;
 }
 
 #edit-project {
@@ -279,14 +305,14 @@ ul {
     background: var(--lilac);
     transition: 0.3s;
     border-radius: 5px;
-    width: 400px;
-    padding: 30px;
-    margin: 30px;
+    width: 300px;
+    padding: 20px;
+    margin: 20px;
     word-wrap: break-word;
 }
 
 .task-display {
-    display: inline-flex;
+    display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
