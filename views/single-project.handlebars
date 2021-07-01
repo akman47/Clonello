@@ -1,7 +1,7 @@
-{{!-- invite user modal --}}
+{{!-- manage project modal --}}
 <section class="modal modal-invite-user">
         <div class="invite-user">
-            <h2>Invite New Project Member</h2>
+            <h2>Manage Project</h2>
             <br>
             <form class="add-user-form" data-project-id="{{project.id}}">
                 <div class="form-input user-menu">
@@ -13,7 +13,8 @@
                     </select>
                 </div>
                 <div class="btn-container">
-                    <button type="submit" class="btn btn-invite-user btn-go modal-btn">Add User</button>
+                    <button type="submit" class="btn btn-invite-user btn-go modal-btn">Add User</button><br>
+                    <button type="button" class="btn btn-danger modal-btn" id="delete-project-btn">Delete Project</button><br>
                     <button type="button" class="btn btn-close-invite-modal modal-btn">Close</button>
                 </div>
             </form>
@@ -104,14 +105,15 @@
             <h2 class="project-title-display">{{project.title}}</h2>
         </div>
         <div class="header-el">
-            <button type="button" class="btn btn-open-invite-modal" id="invite-btn">Invite Project Member</button><br>
-            <button type="button" class="btn" id="delete-project-btn">Delete Project</button><br>
+            <button type="button" class="btn add-task-btn" id="open-task-modal">Add Task</button><br>
+            <button type="button" class="btn" id="open-status-modal">Edit Status</button><br>
+            <button type="button" class="btn btn-open-invite-modal" id="invite-btn">Edit Project</button><br>
         </div>
     </div>
-    <div class="add-task-div">
+    {{!-- <div class="add-task-div">
         <button type="button" class="btn add-task-btn" id="open-task-modal">Add Task</button>
-        <button type="button" class="btn" id="open-status-modal">Manage Status</button><br>
-    </div>
+        <button type="button" class="btn" id="open-status-modal">Add Status</button><br>
+    </div> --}}
     <div class="task-display">
         {{#each project.tasks}}
         <div class="card">
@@ -120,7 +122,7 @@
             <p class="task-status" data-status-id="{{status.id}}">Status: {{status.title}}</p>
             <div class="task-btns">
                 <button type="button" class="btn btn-edit" data-task-id="{{id}}">Edit Task</button>
-                <button type="button" class="btn btn-delete btn-danger" data-task-id="{{id}}">Delete Task</button>
+                <button type="button" class="btn btn-delete" data-task-id="{{id}}">Delete Task</button>
             </div>
         </div>
         {{/each}}

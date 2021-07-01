@@ -236,27 +236,19 @@ ul {
     width: 200px;
 }
 
+.btn-invite-user {
+    margin-bottom: 50px;
+}
+
 .project-title-display {
     font-size: 80px;
     margin: 50px;
     font-family: garamond;
 }
 
-#open-task-modal, #open-status-modal {
+#open-task-modal, #open-status-modal, #invite-btn {
     width: 300px;
     font-size: 20px;
-}
-
-#invite-btn, #delete-project-btn {
-    width: 200px;
-}
-
-#invite-btn:hover {
-    background-color: green;
-}
-
-#delete-project-btn:hover {
-    background-color: red;
 }
 
 .add-task-div {
@@ -305,6 +297,10 @@ ul {
 
 .task-btns {
     text-align: center;
+}
+
+.btn-delete:hover {
+    background-color: red;
 }
 
 /* edit task */
