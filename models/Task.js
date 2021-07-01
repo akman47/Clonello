@@ -13,7 +13,10 @@ Task.init(
     },
     task_text: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
     },
     status_id: {
       type: DataTypes.INTEGER,
