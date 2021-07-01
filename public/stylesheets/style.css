@@ -205,14 +205,14 @@ ul {
     display: none;
     position: fixed;
     z-index: 1;
-    width: 50%;
-    height: 40%;
+    width: 45%;
+    height: 55%;
     overflow: auto;
     align-items: center;
     background-color: rgba(30, 109, 255, 0.8);
     color: var(--white);
     top: 30%;
-    left: 25%;
+    left: 30%;
 }
 
 .add-task, .edit-status, .invite-user {
@@ -265,6 +265,12 @@ ul {
 
 .header-el {
     display: block;
+}
+
+#edit-project {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 /* cards */
