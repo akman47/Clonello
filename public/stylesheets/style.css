@@ -91,6 +91,10 @@ header nav ul li {
     border-radius: 5px;
 }
 
+.btn:hover {
+    cursor: pointer;
+}
+
 .btn-no-style {
     outline: none;
     background: transparent;
@@ -206,7 +210,7 @@ ul {
     position: fixed;
     z-index: 1;
     width: 45%;
-    height: 55%;
+    height: 60%;
     overflow: auto;
     align-items: center;
     background-color: rgba(30, 109, 255, 0.8);
@@ -221,10 +225,6 @@ ul {
     align-items: center;
     padding: 5px;
     margin: 10px;
-}
-
-.modal-add-task {
-    height: 50%;
 }
 
 .btn-container {
