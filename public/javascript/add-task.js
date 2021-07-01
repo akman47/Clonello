@@ -27,7 +27,7 @@ async function newTaskFormHandler(event) {
         getNewTaskId(user_id);
     }
     else {
-        alert(taskResponse.statusText);
+        alert('Task must have a title!');
     }
 }
 

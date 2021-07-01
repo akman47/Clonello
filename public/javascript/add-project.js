@@ -22,7 +22,8 @@ async function addProjectHandler(event) {
   if (response.ok) {
     getNewProjectId(user_id);
   } else {
-    alert(response.statusText);
+    // alert(response.statusText);
+    alert('Project must have a title!');
   }
 };
 
