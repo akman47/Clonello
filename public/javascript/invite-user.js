@@ -32,8 +32,7 @@ function openInviteModal (event) {
     event.preventDefault();
 
     document.querySelector('.modal-invite-user').style.display="block";
-    document.querySelector('.modal-add-status').style.display="none";
-    document.querySelector('.modal-delete-status').style.display="none";
+    document.querySelector('.modal-edit-status').style.display="none";
     document.querySelector('.modal-add-task').style.display="none";
 };
 
