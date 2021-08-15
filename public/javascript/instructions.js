@@ -1,75 +1,122 @@
-const createProject = require('../../public/images/create-project.gif');
-const manageProject = require('../../public/images/manage-project.gif');
-const addTask = require('../images/add-task.gif');
-const addStatus = require('../images/add-status.gif');
-const editTask = require('../images/edit-task.gif');
 
-const dontShow = false;
-if (dontShow) {
+if (document.querySelector('#instructions').checked) {
     closeInstructions();
 }
-console.log(dontShow);
+else {
+    document.querySelector('.modal-instructions').style.display = "block";
+}
 
-const itemClassName="carousel-photo";
+const itemClassName="carousel-content";
 const items = document.getElementsByClassName(itemClassName);
 const totalItems = items.length;
-const slide = 0;
-const moving = true;
+let slide = 0;
+let moving = true;
 
-$(document).ready(function() {
-  // First image is hard coded in index.html
-  const carouselSlides = [
-    {
-      step: "Set up new project",
-      instructions: "Enter project title and select the newly created project",
-      img: createProject
-    },
-    {
-        step: "Manage project",
-        instructions: "Invite other members to join the project and edit the project's title",
-        img: manageProject
-    },
-    {
-      step: "Create tasks",
-      instructions: "Add tasks, assign to project member, and provide a status",
-      img: addTask
-    },
-    {
-        step: "Manage task status",
-        instructions: "Create custom statuses or delete obsolete ones",
-        img: addStatus
-    },
-    {
-        step: "Update tasks",
-        instructions: "Reassign task to another project member or update task status and title",
-        img: editTask
+function setInitialClasses() {
+    items[totalItems - 1].classList.add("prev");
+    items[0].classList.add("active");
+    items[1].classList.add("next");
+}
+
+function setEventListeners() {
+    const next = document.getElementsByClassName('carousel-btn--next')[0];
+    const prev = document.getElementsByClassName('carousel-btn--prev')[0];
+
+    next.addEventListener('click', moveNext);
+    prev.addEventListener('click', movePrev);
+}
+
+function moveNext() {
+    if(!moving) {
+        // if last slide, reset to 0, else +1
+        if (slide === (totalItems-1)) {
+            slide = 0;
+        }
+        else {
+            slide++;
+        }
+
+        // move carousel to updated slide
+        moveCarouselTo(slide);
     }
-  ]
+}
 
-  carouselSlides.forEach((slide, i) => {
-    $('.carousel-content').append(`
-    <img class="carousel-photo" src=${slide.img}></img>
-    <div class="info-container">
-      <div class="row align-items-center justify-content-center">
-        <h2 class="display-4 mb-2">${slide.step}</h2>
-      </div>
-      <div class="row align-items-center justify-content-center"> 
-        <h3>${slide.instructions}</h3>
-      </div>
-    </div>`)
-  })
-});
+function movePrev() {
+    if (!moving) {
+        // if first slide, set last slide, else -1
+        if (slide === 0) {
+            slide = totalItems - 1;  
+        }
+        else {
+            slide--;
+        }
+
+        moveCarouselTo(slide);
+    }
+}
+
+function disableInteraction() {
+    // set moving to true for same duration as transition
+    moving = true;
+    setTimeout (function() {
+        moving = false
+    }, 500);
+}
+
+function moveCarouselTo(slide) {
+    // check if carousel is moving, if not, allow interaction
+    if (!moving) {
+        disableInteraction();
+        // update old adjacent slides with new ones
+        let newPrevious = slide - 1;
+        let newNext = slide + 1;
+        let oldPrevious = slide - 2;
+        let oldNext = slide + 2;
+
+        if ((totalItems - 1) > 3) {
+            // checks and updates if new slides are out of bounds
+            if (newPrevious <= 0) {
+                oldPrevious = totalItems - 1;
+            }
+            else if (newNext >= (totalItems - 1)){
+                oldNext = 0;
+            }
+
+            // checks and updates if slide is at start/end
+            if (slide === 0){
+                newPrevious = totalItems - 1;
+                oldPrevious = totalItems - 2;
+                oldNext = slide + 1;
+            }
+            else if (slide === (totalItems - 1)){
+                newPrevious = slide - 1;
+                newNext = 0;
+                oldNext = 1;
+            }
+
+            // reset old next/prev elements to default classes
+            items[oldPrevious].className = itemClassName;
+            items[oldNext].className = itemClassName;
+
+            // add new classes
+            items[newPrevious].className = itemClassName + " prev";
+            items[slide].className = itemClassName + " active";
+            items[newNext].className = itemClassName + " next";
+        }
+    }
+}
+
+function initCarousel() {
+    setInitialClasses();
+    setEventListeners();
+
+    // set moving to false so carousel becomes interactive
+    moving = false;
+}
 
 function closeInstructions() {
-    if (document.querySelector('#instructions').value === "hide") {
-        dontShow = true;
-    }
-    console.log('click');
-    console.log(dontShow);
-
     document.querySelector('.modal-instructions').style.display = 'none';
 }
 
-document.querySelector('#hide-howto').addEventListener("click", function() {
-    console.log('click');
-});
+document.querySelector('#hide-howto').addEventListener("click", closeInstructions);
+initCarousel();
