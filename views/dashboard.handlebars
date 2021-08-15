@@ -1,3 +1,32 @@
+<div class="modal modal-instructions">
+  <div class="how-to">
+    <h2>New to Clonello?</h2>
+    <span>Let's get you started!</span>
+    <div class="carousel-wrapper">
+        <div class="carousel">
+          <!-- Slide One - Set the background image for this slide in the line below -->
+          <div class="carousel-content">
+            <img class="carousel-photo initial" src="/images/create-project.gif"></img>
+            <div class="info-container">
+              <div class="row align-items-center justify-content-center">
+                <h2 class="display-4 mb-2">Set up a new project</h2>
+              </div>
+              <div class="row align-items-center justify-content-center"> 
+                <h3>Enter project title and select the newly created project</h3>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-btn--next"></div>
+          <div class="carousel-btn--prev"></div>
+        </div>
+    </div>
+    {{!-- checkbox to hide modal --}}
+    <input type="checkbox" id="instructions" name="instructions" value="hide">
+    <label for="instructions">Don't show again at startup</label><br>
+    <button type="button" id="hide-howto" class="btn">Close</button>
+  </div>
+</div>
+
 <section class="create-project">
   <h2 id="project-form-header">Create New Project</h2>
   <form class="new-project-form" data-user-id="{{user.id}}"></form>
@@ -23,3 +52,4 @@
 {{/if}}
 
 <script src="/javascript/add-project.js"></script>
+<script src="/javascript/instructions.js"></script>
