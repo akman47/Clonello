@@ -204,6 +204,140 @@ ul {
     list-style: none;
 }
 
+/* carousel */
+.carousel-wrapper {
+    overflow: hidden;
+}
+
+.carousel-wrapper * {
+    box-sizing: border-box;
+}
+
+.carousel {
+    transform-style: preserve-3d;
+}
+
+.how-to {
+    background-color: rgba(245,245,245,0.9);
+    color: var(--blue);
+    text-align: center;
+}
+
+.how-to h2 {
+    padding-top: 20px;
+}
+
+.how-to label {
+    font-size: 12px;
+}
+
+.how-to h2, h3, span, label {
+    color: var(--blue);
+}
+
+.footer-how-to {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.carousel-content {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    margin: auto;
+    padding: 1rem 4rem;
+    z-index: 100;
+    transition: transform .5s, opacity .5s, z-index .5s;
+}
+
+.carousel-photo {
+    width: 80%;
+}
+
+.info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    line-height: 1.5;
+}
+
+.info-container span {
+    font-size: 14px;
+}
+
+.carousel-content.initial, .carousel-content.active {
+    opacity: 1;
+    position: relative;
+    z-index: 900;
+}
+
+.carousel-content.prev, .carousel-content.next {
+    z-index: 800;
+}
+
+.carousel-content.prev {
+    transform: translateX(-100%);
+}
+
+.carousel-content.next {
+    transform: translateX(100%);
+}
+
+.carousel-btn--prev,
+.carousel-btn--next {
+  position: absolute;
+  top:50%;
+  width: 3rem;
+  height: 3rem;
+  background-color: #FFF;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  cursor: pointer; 
+  z-index: 1001; /* Sit on top of everything */
+  border: 1px solid black;
+}
+
+.carousel-btn--prev {
+  left: 20px;
+}
+
+.carousel-btn--next {
+  right: 20px;
+}
+
+.carousel-btn--prev::after,
+.carousel-btn--next::after {
+  content: " ";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: 50%;
+  left: 54%;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  transform: translate(-50%, -50%) rotate(135deg);
+}
+
+.carousel-btn--next::after {
+  left: 47%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.modal-instructions {
+    position: fixed;
+    z-index: 1;
+    width: 80%;
+    height: 80%;
+    align-items: center;
+    top: 15%;
+    left: 10%;
+    padding: 15px;
+}
+    
+
 /* single-project view */
 .modal-invite-user, .modal-add-task, .modal-edit-status {
     display: none;
@@ -348,4 +482,125 @@ ul {
 #edit-task-text, #task-user-menu, #status-menu, #new-status-text, #new-task {
     width: 30vw;
     margin-bottom: 15px;
+}
+
+/* MEDIA QUERY FOR SMALLER SCREENS */
+@media screen and (max-width: 616px) {
+    #signup-header {
+        margin: 20px;
+        font-size: 30px;
+    }
+    
+    #description {
+        padding: 0px;
+    }
+
+    #description p {
+        font-size: 30px;
+    }
+
+    .account h2 {
+        font-size: 20px;
+    }
+
+    .access-project-btn {
+        font-size: 18px;
+        width: fit-content;
+    }
+
+    .project-display {
+        margin-top: 25px;
+    }
+
+    #project-title {
+        margin-bottom: 0px;
+    }
+
+    .create-project {
+        margin-top: 30px;
+    }
+
+    .project-form-header {
+        margin: 30px;
+    }
+    .project-title-display {
+        font-size: 50px;
+        text-align: center;
+    }
+
+    .btn-invite-user {
+        margin-bottom: 30px;
+    }
+
+    #open-task-modal, #open-status-modal, #invite-btn {
+        font-size: 15px;
+        padding: 5px;
+        width: 80%;
+    }
+
+    .modal-instructions {
+        top: 20%;
+        left: 0%;
+        padding: 0px;
+        width: 100%;
+    }
+
+    .card {
+        padding: 10px;
+        margin: 10px;
+        width: 200px;
+        text-align: center;
+    }
+
+    .task-btns {
+        display: flex;
+    }
+
+    .task-display {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .modal {
+        width: 60%;
+    }
+
+    .modal-instructions {
+        width: 100%;
+    }
+
+    .new-task-form {
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .form-input {
+        margin: 2px;
+    }
+
+    .modal-invite-user, .modal-add-task, .modal-edit-status {
+        background-color: rgba(30, 109, 255, 1);
+    }
+
+    .member-list {
+        font-size: 15px;
+        margin-left: 15px;
+    }
+
+    .member-list h2 {
+        font-size: 20px;
+    }
+
+    .how-to {
+        margin-top: 30px;
+        background-color: rgba(245,245,245,1);
+    }
+
+    .carousel-btn--next {
+        right: 10px;
+    }
+
+    .carousel-btn--prev {
+        left: 10px;
+    }
 }
