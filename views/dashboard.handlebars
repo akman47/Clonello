@@ -1,5 +1,65 @@
+<div class="modal modal-instructions">
+  <div class="how-to">
+    <h2>New to Clonello?</h2>
+    <span>Let's get you started!</span>
+    <div class="carousel-wrapper">
+        <div class="carousel">
 
-{{> instructions }}
+          <div class="carousel-content initial">
+            <img class="carousel-photo" src="/images/create-project.gif"></img>
+            <div class="info-container">
+                <h3>1. Set up a new project</h3>
+                <span>Enter project title and select the newly created project</span>
+            </div>
+          </div>
+          
+          <div class="carousel-content">
+            <img class="carousel-photo" src="/images/manage-project.gif"></img>
+            <div class="info-container">
+              <h3>2. Manage project</h3>
+              <span>Invite other members to join the project and edit the project's title</span>
+            </div>
+          </div>
+
+          <div class="carousel-content">
+            <img class="carousel-photo" src="/images/add-task.gif"></img>
+            <div class="info-container">
+              <h3>3. Create tasks</h3>
+              <span>Add tasks, assign to project member, and provide a status</span>
+            </div>
+          </div>
+
+          <div class="carousel-content">
+            <img class="carousel-photo" src="/images/add-status.gif"></img>
+            <div class="info-container">
+              <h3>4. Manage task status</h3>
+              <span>Create custom statuses or delete obsolete ones</span>
+            </div>
+          </div>
+
+          <div class="carousel-content">
+            <img class="carousel-photo" src="/images/edit-task.gif"></img>
+            <div class="info-container">
+                <h3>5. Update tasks</h3>
+                <span>Reassign task to another project member or update task status and title</span>
+            </div>
+          </div>
+
+          <div class="carousel-btn--next"></div>
+          <div class="carousel-btn--prev"></div>
+        </div>
+    </div>
+
+    <div class="footer-how-to">
+      <div>
+        {{!-- checkbox to hide modal --}}
+        <input type="checkbox" id="instructions" name="instructions" value="hide" onClick="handleRadio(this)">
+        <label for="instructions">Don't show again at startup</label><br>
+      </div>
+      <button type="button" id="hide-howto" class="btn">Close</button>
+    </div>
+  </div>
+</div>
 
 <section class="create-project">
   <h2 id="project-form-header">Create New Project</h2>
@@ -26,3 +86,4 @@
 {{/if}}
 
 <script src="/javascript/add-project.js"></script>
+<script src="/javascript/instructions.js"></script>

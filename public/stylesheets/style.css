@@ -218,9 +218,13 @@ ul {
 }
 
 .how-to {
-    background-color: rgba(245,245,245,0.8);
+    background-color: rgba(245,245,245,0.9);
     color: var(--blue);
     text-align: center;
+}
+
+.how-to h2 {
+    padding-top: 20px;
 }
 
 .how-to label {
@@ -478,4 +482,125 @@ ul {
 #edit-task-text, #task-user-menu, #status-menu, #new-status-text, #new-task {
     width: 30vw;
     margin-bottom: 15px;
+}
+
+/* MEDIA QUERY FOR SMALLER SCREENS */
+@media screen and (max-width: 616px) {
+    #signup-header {
+        margin: 20px;
+        font-size: 30px;
+    }
+    
+    #description {
+        padding: 0px;
+    }
+
+    #description p {
+        font-size: 30px;
+    }
+
+    .account h2 {
+        font-size: 20px;
+    }
+
+    .access-project-btn {
+        font-size: 18px;
+        width: fit-content;
+    }
+
+    .project-display {
+        margin-top: 25px;
+    }
+
+    #project-title {
+        margin-bottom: 0px;
+    }
+
+    .create-project {
+        margin-top: 30px;
+    }
+
+    .project-form-header {
+        margin: 30px;
+    }
+    .project-title-display {
+        font-size: 50px;
+        text-align: center;
+    }
+
+    .btn-invite-user {
+        margin-bottom: 30px;
+    }
+
+    #open-task-modal, #open-status-modal, #invite-btn {
+        font-size: 15px;
+        padding: 5px;
+        width: 80%;
+    }
+
+    .modal-instructions {
+        top: 20%;
+        left: 0%;
+        padding: 0px;
+        width: 100%;
+    }
+
+    .card {
+        padding: 10px;
+        margin: 10px;
+        width: 200px;
+        text-align: center;
+    }
+
+    .task-btns {
+        display: flex;
+    }
+
+    .task-display {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .modal {
+        width: 60%;
+    }
+
+    .modal-instructions {
+        width: 100%;
+    }
+
+    .new-task-form {
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .form-input {
+        margin: 2px;
+    }
+
+    .modal-invite-user, .modal-add-task, .modal-edit-status {
+        background-color: rgba(30, 109, 255, 1);
+    }
+
+    .member-list {
+        font-size: 15px;
+        margin-left: 15px;
+    }
+
+    .member-list h2 {
+        font-size: 20px;
+    }
+
+    .how-to {
+        margin-top: 30px;
+        background-color: rgba(245,245,245,1);
+    }
+
+    .carousel-btn--next {
+        right: 10px;
+    }
+
+    .carousel-btn--prev {
+        left: 10px;
+    }
 }
