@@ -227,7 +227,7 @@ ul {
     font-size: 12px;
 }
 
-.how-to h2, h4, span, label {
+.how-to h2, h3, span, label {
     color: var(--blue);
 }
 
@@ -261,7 +261,7 @@ ul {
 }
 
 .info-container span {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .carousel-content.initial, .carousel-content.active {

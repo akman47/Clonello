@@ -1,5 +1,16 @@
+function handleRadio(event) {
+    if (document.querySelector('#instructions').checked) {
+        localStorage.setItem("data", JSON.stringify({'showInfo':'checked'}));
+    }
+    else {
+        localStorage.setItem("data", JSON.stringify({'showInfo':'unchecked'}));
+    }
+}
 
-if (document.querySelector('#instructions').checked) {
+if (localStorage.getItem('data') === null) {
+    document.querySelector('.modal-instructions').style.display = "block";
+}
+else if ((JSON.parse(localStorage.getItem('data')).showInfo) === 'checked') {
     closeInstructions();
 }
 else {
@@ -119,4 +130,8 @@ function closeInstructions() {
 }
 
 document.querySelector('#hide-howto').addEventListener("click", closeInstructions);
+document.querySelector('#info').addEventListener("click", function() {
+    document.querySelector('.modal-instructions').style.display = 'block';
+    console.log('click help');
+});
 initCarousel();
